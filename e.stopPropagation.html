@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #modal {
+            position: absolute;
+            display: none;
+            left: 50%;
+            top: 50%;
+            margin-left: -75px;
+            margin-top: -150px;
+            width: 300px;
+            height: 150px;
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="modal"></div>
+    <button id="btn">我是按钮</button>
+    <script>
+        var oModal = document.getElementById('modal');
+        var oBtn = document.getElementById('btn');
+
+        oBtn.onclick = function (e) {
+            e.stopPropagation();
+            oModal.style.display = 'block';
+
+        }
+        document.onclick = function () {
+            oModal.style.display = 'none';
+        }
+        oModal.onclick = function (e) {
+            e.stopPropagation();
+            oModal.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

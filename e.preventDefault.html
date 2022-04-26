@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            height: 200px;
+            width: 200px;
+            background-color: #000;
+        }
+
+        body {
+            height: 2000px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="info">
+    <div id="box"></div>
+    <h3 id="delta">0</h3>
+    <script>
+        var oInfo = document.getElementById('info');
+        oInfo.onkeypress = function (e) {
+
+            if (!(e.charCode >= 48 && e.charCode <= 57 || e.charCode >= 97 && e.charCode <= 122)) {
+                e.preventDefault();
+            }
+
+        }
+
+        var a = 0;
+        var oBox = document.getElementById('box');
+        var odelta = document.getElementById('delta');
+        oBox.onmousewheel = function (e) {
+            e.preventDefault();
+            if (e.deltaY > 0) {
+                a -= 1;
+            } else {
+                a += 1;
+            }
+            odelta.innerText = a;
+        }
+    </script>
+</body>
+
+</html>
