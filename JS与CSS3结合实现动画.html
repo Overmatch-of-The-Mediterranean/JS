@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">点我</button>
+    <div id="box"></div>
+    <script>
+        var oBtn = document.getElementById('btn');
+        var oBox = document.getElementById('box');
+        var judge = 1;
+        var lock = true;
+        oBtn.onclick = function () {
+            if (!lock) return;
+            oBox.style.transition = 'all 2s linear 0s';
+            if (judge == 1) {
+                oBox.style.left = '1100px';
+                judge = 2;
+            } else {
+                oBox.style.left = '100px';
+                judge = 1;
+            }
+            lock = false;
+            setTimeout(function () {
+                lock = true;
+            }, 2000)
+        }
+    </script>
+</body>
+
+</html>

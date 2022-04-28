@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">点我</button>
+    <div id="box"></div>
+    <script>
+        var oBox = document.getElementById('box');
+        var oBtn = document.getElementById('btn');
+        var left = 100;
+        oBtn.onclick = function () {
+            var timer = setInterval(function () {
+                // if (left >= 1000) {
+                //     clearInterval(timer);
+                // }
+                // 疑问：为什么第一个if执行后，定时器还在执行left += 10，
+                // 难道无法清除正在执行的定时器？
+
+                left += 10;
+                if (left >= 1000) {
+                    clearInterval(timer);
+                }
+                oBox.style.left = left + 'px';
+            }, 20)
+            // if (left >= 1000) {
+            //     clearInterval(timer);
+            // }
+
+        }
+    </script>
+</body>
+
+</html>
