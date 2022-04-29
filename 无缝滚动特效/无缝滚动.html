@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 1000px;
+            height: 130px;
+            border: 1px solid black;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .box ul {
+            position: relative;
+            width: 3000px;
+        }
+
+        .box ul li {
+            float: left;
+            list-style: none;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<div id="box" class="box">
+    <ul id="list">
+        <li><img src="0.png" alt=""></li>
+        <li><img src="1.png" alt=""></li>
+        <li><img src="2.png" alt=""></li>
+        <li><img src="3.png" alt=""></li>
+        <li><img src="4.png" alt=""></li>
+        <li><img src="5.png" alt=""></li>
+    </ul>
+</div>
+<script>
+    var box = document.getElementById('box');
+    var list = document.getElementById('list')
+    list.innerHTML += list.innerHTML;
+    var left = 0;
+    var timer;
+    function move() {
+        // 设表先关，防止动画积累
+        clearInterval(timer);
+        timer = setInterval(function () {
+            left -= 4;
+            list.style.left = left + 'px';
+            if (left <= -1260) left = 0;
+        }, 20)
+    }
+    move();
+    list.onmouseenter = function () {
+        clearInterval(timer);
+    }
+    list.onmouseleave = function () {
+        move();
+    }
+
+</script>
+
+<body>
+
+</body>
+
+</html>

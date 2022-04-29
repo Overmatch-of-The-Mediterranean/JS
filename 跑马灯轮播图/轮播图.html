@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            position: relative;
+            /* left: 0; */
+            width: 650px;
+            height: 360px;
+            border: 1px solid #000;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .box ul {
+            position: relative;
+            width: 5000px;
+            transition: left 0.5s ease 0s;
+        }
+
+        .box ul li {
+            float: left;
+            list-style: none;
+        }
+
+        .box a {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: orange;
+        }
+
+        .box .rightbtn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            margin-top: -25px;
+        }
+
+        .box .leftbtn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            margin-top: -25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="box">
+        <ul id="list">
+            <li><img src="0.jpg" alt=""></li>
+            <li><img src="1.jpg" alt=""></li>
+            <li><img src="2.jpg" alt=""></li>
+            <li><img src="3.jpg" alt=""></li>
+            <li><img src="4.jpg" alt=""></li>
+        </ul>
+        <a href="javascript:;" class="leftbtn" id="leftbtn"></a>
+        <a href="javascript:;" class="rightbtn" id="rightbtn"></a>
+    </div>
+
+    <script>
+        var box = document.getElementById('box');
+        var list = document.getElementById('list');
+        var leftbtn = document.getElementById('leftbtn');
+        var rightbtn = document.getElementById('rightbtn');
+        var cloneli = list.firstElementChild.cloneNode(true);
+        list.appendChild(cloneli);
+        var idx = 0;
+        var lock = true;
+        rightbtn.onclick = function () {
+            if (!lock) return;
+            lock = false;
+            list.style.transition = "left 0.5s ease 0s";
+            idx++;
+            list.style.left = -idx * 650 + 'px';
+            if (idx > 4) {
+                setTimeout(function () {
+                    list.style.transition = "none";
+                    list.style.left = 0;
+                    idx = 0;
+                }, 500)
+            }
+
+            setTimeout(function () {
+                lock = true;
+            }, 500)
+        }
+        leftbtn.onclick = function () {
+            if (!lock) return;
+            if (idx == 0) {
+                list.style.transition = "none";
+                list.style.left = -5 * 650 + 'px';
+                setTimeout(function () {
+                    list.style.transition = "left 0.5s ease 0s";
+                    idx = 4;
+                    list.style.left = -idx * 650 + 'px';
+                }, 0)
+            }
+            else {
+                idx--;
+                list.style.left = -idx * 650 + 'px';
+            }
+            lock = false;
+            setTimeout(function () {
+                lock = true;
+            }, 500)
+        }
+    </script>
+</body>
+
+</html>
