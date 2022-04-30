@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            position: relative;
+            width: 650px;
+            height: 360px;
+            border: 1px solid #000;
+            margin: 50px auto;
+        }
+
+        .box ul li {
+            position: absolute;
+            left: 0;
+            top: 0;
+            list-style: none;
+            opacity: 0;
+        }
+
+        .box ul li:first-child {
+            opacity: 1;
+        }
+
+        .box a {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .box .leftbtn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            margin-top: -25px;
+        }
+
+        .box .rightbtn {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            margin-top: -25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="box">
+        <ul id="list">
+            <li><img src="0.jpg" alt=""></li>
+            <li><img src="1.jpg" alt=""></li>
+            <li><img src="2.jpg" alt=""></li>
+            <li><img src="3.jpg" alt=""></li>
+            <li><img src="4.jpg" alt=""></li>
+        </ul>
+        <a href="javascript:;" id="leftbtn" class="leftbtn"></a>
+        <a href="javascript:;" id="rightbtn" class="rightbtn"></a>
+        <script>
+            var box = document.getElementById('box');
+            var list = document.getElementById('list');
+            var leftbtn = document.getElementById('leftbtn');
+            var rightbtn = document.getElementById('rightbtn');
+            var li = document.getElementsByTagName('li');
+            var idx = 0;
+            var lock = true;
+            rightbtn.onclick = function () {
+                if (!lock) return;
+                lock = false;
+                li[idx].style.opacity = '0';
+                idx++;
+                if (idx > 4) {
+                    idx = 0;
+                    li[idx].style.opacity = '1';
+                    li[idx].style.transition = 'opacity 1s ease 0s';
+                }
+                li[idx].style.opacity = '1';
+                li[idx].style.transition = 'opacity 1s ease 0s';
+                setTimeout(function () {
+                    lock = true;
+                }, 1000)
+            }
+            // 自己写的代码
+            // leftbtn.onclick = function () {
+            //     if (!lock) return;
+            //     lock = false;
+            //     li[idx].style.opacity = '0';
+            //     if (idx == 0) {
+            //         idx = 4;
+            //         li[idx].style.opacity = '1';
+            //         li[idx].style.transition = 'opacity 1s ease 0s';
+            //     } else {
+            //         idx--;
+            //         li[idx].style.opacity = '1';
+            //         li[idx].style.transition = 'opacity 1s ease 0s';
+            //     }
+            //     setTimeout(function () {
+            //         lock = true;
+            //     }, 1000)
+            // }
+            // 视频的代码
+            leftbtn.onclick = function () {
+                if (!lock) return;
+                lock = false;
+                li[idx].style.opacity = '0';
+                idx--;
+                if (idx < 0) idx = 4;
+                li[idx].style.opacity = '1';
+                li[idx].style.transition = 'opacity 1s ease 0s';
+                setTimeout(function () {
+                    lock = true;
+                }, 1000)
+            }
+        </script>
+    </div>
+</body>
+
+</html>
