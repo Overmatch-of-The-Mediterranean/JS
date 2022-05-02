@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 5000px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 全局变量是window属性,多个JS文件共享全局作用域 -->
+    <script>
+        var a = 6;
+        console.log(window.a == a);
+        console.log(window.a);
+    </script>
+    <script src="JS1.js"></script>
+    <script src="JS2.js"></script>
+    <!-- 内置函数普遍是window的方法 -->
+    <script>
+        console.log(window.alert == alert);
+        window.setInterval(function () {
+            window.console.log(1);
+        }, 1000)
+    </script>
+    <!-- 窗口尺寸相关属性 -->
+    <script>
+        console.log('窗口宽（包含滚动条）', window.innerWidth);
+        console.log('窗口宽（不含滚动条）', document.documentElement.clientWidth);
+        console.log('窗口外宽', window.outerWidth);
+        // 监听窗口改变尺寸事件
+        window.onresize = function () {
+            var root = document.documentElement
+            console.log(root.clientHeight);
+            console.log(root.clientWidth);
+
+        }
+        // 已卷动高度
+        // document.documentElement.scrollTop不只读,返回顶部特效可以用其来制作
+        // window.scrollY只读
+        window.onscroll = function () {
+            console.log('窗口动了', window.scrollY);
+        }
+    </script>
+</body>
+
+</html>
