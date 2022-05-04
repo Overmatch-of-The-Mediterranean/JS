@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 5000px;
+        }
+
+        .content-part {
+            background-color: gray;
+            margin: 0px auto;
+            margin-bottom: 30px;
+            width: 700px;
+        }
+
+        .floor {
+            position: fixed;
+            right: 100px;
+            top: 100px;
+            width: 100px;
+            text-align: center;
+            background-color: orange;
+            line-height: 40px;
+        }
+
+        .floor ul li.current {
+            background-color: red;
+        }
+
+        li {
+            cursor: pointer;
+            list-style: none;
+            border-bottom: 1px solid #000;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="floor">
+        <ul id="list">
+            <li data-n="刘豪" class="current">刘豪</li>
+            <li data-n="景哲">景哲</li>
+            <li data-n="帅兵">帅兵</li>
+            <li data-n="牛马">牛马</li>
+            <li data-n="宇航">宇航</li>
+        </ul>
+    </div>
+    <section class="content-part" style="height: 500px;" data-n="刘豪">刘豪历险记</section>
+    <section class="content-part" style="height: 600px;" data-n="景哲">景哲历险记</section>
+    <section class="content-part" style="height: 450px;" data-n="帅兵">帅兵历险记</section>
+    <section class="content-part" style="height: 980px;" data-n="牛马">牛马历险记</section>
+    <section class="content-part" style="height: 300px;" data-n="宇航">宇航历险记</section>
+    <script>
+        var arr = [];
+        var nowfloor = -1;
+        var contentParts = document.querySelectorAll('.content-part');
+        var list = document.getElementById('list');
+        var lis = document.querySelectorAll('#list li');
+        // 事件委托
+        list.onclick = function (e) {
+            if (e.target.tagName.toLowerCase() == 'li') {
+                // alert(e.target.getAttribute('data-n'));
+                // 得到非标准属性；
+                var n = e.target.getAttribute('data-n');
+                // 属性选择器
+                var content = document.querySelector('.content-part[data-n=' + n + ']');
+                document.documentElement.scrollTop = content.offsetTop + 1;
+            }
+        }
+        // 将每个栏目的offsetTop值推入数组
+        for (var i = 0; i < contentParts.length; i++) {
+            arr.push(contentParts[i].offsetTop);
+        }
+        arr.push(Infinity);
+        console.log(arr);
+        window.onscroll = function () {
+            var scrollTop = document.documentElement.scrollTop;
+            for (var i = 0; i < arr.length; i++) {
+                if (scrollTop >= arr[i] && scrollTop <= arr[i + 1]) {
+                    break;
+                }
+            }
+            // 数字出现节流
+            if (nowfloor != i) {
+                console.log(i);
+                nowfloor = i;
+            }
+            for (var j = 0; j < lis.length; j++) {
+                if (j == i) lis[j].className = 'current';
+                else lis[j].className = '';
+            }
+        }
+    </script>
+</body>
+
+</html>
