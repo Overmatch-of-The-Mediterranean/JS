@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {
+            a: 10,
+            b: 20,
+            c: 30,
+            // 属性值是函数的，则为对象的方法
+            sayHello: function () {
+                console.log('Hellow World!');
+            }
+        }
+        obj.sayHello();
+    </script>
+</body>
+
+</html>

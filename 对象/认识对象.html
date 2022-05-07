@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {
+            a: 10,
+            b: 20,
+            'i-am-good': '歪瑞古德'
+        }
+        // 属性名用变量储存，用[]调用
+        var k = 'a';
+        console.log(obj[k]);
+        console.log(obj.a);
+        // 属性名不符合JS命名规范用[]调用
+        console.log(obj['i-am-good']);
+
+        // 属性的更改
+        obj.a = 30;
+        console.log(obj.a);
+        // 属性的增加
+        obj.c = 40;
+        console.log(obj);
+        // 属性的删除
+        delete obj.a;
+        console.log(obj);
+    </script>
+</body>
+
+</html>
