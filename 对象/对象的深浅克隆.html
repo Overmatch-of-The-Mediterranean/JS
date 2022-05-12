@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {
+            a: 10,
+            b: 20,
+            c: [44, 55, {
+                a: 1,
+                b: 2,
+                c: [66, 77]
+            }]
+        };
+        var result = {};
+        // 浅克隆
+        for (var k in obj) {
+            result[k] = obj[k];
+        }
+        // console.log(result);
+        obj.c[2].c.push(99);
+        // 深克隆,不能用typeof先判断，因为数组返回值object。
+        function deepclone(o) {
+            if (Array.isArray(o)) {
+                var result1 = [];
+                for (var i = 0; i < o.length; i++) {
+                    result1.push(deepclone(o[i]));
+                }
+            } else if (typeof o == 'object') {
+                var result1 = {};
+                for (var k in o) {
+                    result1[k] = deepclone(o[k]);
+                }
+            } else {
+                var result1 = o;
+            }
+            return result1;
+        }
+        obj1 = deepclone(obj);
+        obj.c[2].c.push(857);
+        console.log(obj1);
+        console.log(obj);
+        console.log(obj == obj1);
+    </script>
+</body>
+
+</html>
