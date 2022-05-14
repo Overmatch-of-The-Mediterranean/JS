@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+    <div id="box4"></div>
+    <div id="box5"></div>
+    <div id="box6"></div>
+    <!-- 函数的上下文this由函数的调用方式决定与定义无关 -->
+
+    <script>
+        // 上下文规则1
+        //对象.方法(),this就是打点调用的对象。
+        function outer() {
+            var a = 1;
+            var b = 1;
+            return {
+                a: 33,
+                b: 44,
+                c: function () {
+                    console.log(this.a + this.b);
+                }
+            }
+        }
+        outer().c();
+        // 上下文规则2
+        // ()直接调用函数, this是window
+        function fun() {
+            return this.a + this.b;
+        }
+        var a = 1;
+        var b = 2;
+        var obj = {
+            a: 3,
+            b: fun(),
+            c: fun
+        };
+        var result = obj.c();
+        console.log(result);
+        // 上下文规则3
+        // 数组（类数组）枚举调用函数时，函数的上下文是这个数组（类数组）
+        function fun1() {
+            arguments[3]();
+        }
+        fun1('A', 'B', 'C', function () {
+            console.log(this[1]);
+        });
+        // 上下文规则4
+        // IIFE（立即执行函数）调用，其上下文是window对象
+        var a = 1;
+        var obj1 = {
+            a: 2,
+            fun2: (function () {
+                var a = this.a;
+                return function () {
+                    // 这点有个细节，函数的闭包，所以第一个a是定义的函数外界的a = this.a;
+                    console.log(a + this.a);
+                }
+            })()
+        }
+        obj1.fun2();
+        // 上下文规则5
+        // 用定时器或延时器调用函数时，上下文是window
+        var obj2 = {
+            a: 1,
+            b: 2,
+            fun3: function () {
+                console.log(this.a + this.b);
+            }
+        }
+        var a = 3;
+        var b = 4;
+        setTimeout(obj2.fun3, 2000)
+        // 上下文规则6
+        // 事件处理函数的上下文是绑定事件的DOM元素
+        // 案例1：点击那个盒子，那个盒子就变红，要求使用同一个事件处理函数实现
+        var box1 = document.getElementById('box1');
+        var box2 = document.getElementById('box2');
+        var box3 = document.getElementById('box3');
+        function colorToRed() {
+            this.style.backgroundColor = 'red';
+        }
+        box1.onclick = colorToRed;
+        box2.onclick = colorToRed;
+        box3.onclick = colorToRed;
+        // 案例2：点击那个盒子，那个盒子在2s后就变红，要求使用同一个事件处理函数实现
+        var box4 = document.getElementById('box4');
+        var box5 = document.getElementById('box5');
+        var box6 = document.getElementById('box6');
+        function colorToRed2() {
+            var self = this;
+            setTimeout(function () {
+                self.style.backgroundColor = 'red';
+            }, 2000)
+
+        }
+        box4.onclick = colorToRed2;
+        box5.onclick = colorToRed2;
+        box6.onclick = colorToRed2;
+    </script>
+
+
+</body>
+
+</html>
