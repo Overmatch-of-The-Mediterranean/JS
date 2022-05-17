@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // prototype属性是个对象, 它默认拥有constructor属性（指向函数）
+        function sum() {
+
+        }
+        console.log(sum.prototype.constructor === sum);
+        // prototype属性对普通函数没有用，对于构造函数非常有用
+        // 构造函数的prototype的属性是它的实例的原型
+        // 原型链查找：实例可以通过打点访问它的原型的属性和方法
+        function People(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        // 在People.prototype上添加了nationality属性
+        // People.prototype.nationality加在new前
+        People.prototype.nationality = '中国';
+        var xiaoming = new People('小明', 18, '男');
+        var tom = new People('汤姆', 18, '男');
+        tom.nationality = '美国'
+        console.log(xiaoming.nationality);
+        // 类似全局和局部变量一样，有遮蔽效应
+        console.log(tom.nationality);
+        console.log(xiaoming);
+        console.log(xiaoming.__proto__ === People.prototype);
+        // hasOwnProperty方法可以检查对象是否真正拥有这个属性或方法
+        console.log(xiaoming.hasOwnProperty('name'));
+        console.log(xiaoming.hasOwnProperty('age'));
+        console.log(xiaoming.hasOwnProperty('sex'));
+        console.log(xiaoming.hasOwnProperty('nationality'));
+        // in运算符只能检查某个属性或方法能否被对象访问，不能检查是否是自己的属性或方法
+        console.log('name' in xiaoming);
+        console.log('age' in xiaoming);
+        console.log('sex' in xiaoming);
+        console.log('nationality' in xiaoming);
+    </script>
+</body>
+
+</html>
