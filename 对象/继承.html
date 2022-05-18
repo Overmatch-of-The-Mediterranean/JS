@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 父类
+        function People(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        People.prototype.sayHello = function () {
+            console.log('我是' + this.name + '今年' + this.age + '岁了');
+        }
+        // 子类
+        function Student(name, age, sex, school, number) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+            this.school = school;
+            this.number = number;
+        }
+        // 关键语句，实现继承,建立Student与People的联系
+        Student.prototype = new People();
+        // 子类也可以重写父类的方法或属性
+        People.prototype.sayHello = function () {
+            console.log('你好！' + '我是' + this.name + '今年' + this.age + '岁了');
+        }
+        Student.prototype.study = function () {
+            console.log(this.name + '正在学习');
+        }
+        var haimeimei = new Student('hanmeimei', 15, '女', 'HPU', '1');
+        // 调用Poeple上的方法
+        haimeimei.sayHello();
+        haimeimei.study();
+    </script>
+</body>
+
+</html>

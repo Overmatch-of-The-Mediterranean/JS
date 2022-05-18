@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 原型链的终点是object.prototype
+        function People(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        var xiaoming = new People('xiaoming', 14, '男');
+        console.log(xiaoming.__proto__.__proto__ === Object.prototype);
+        console.log(Object.prototype.__proto__);
+        var char = xiaoming.toString();
+        console.log(char);
+        console.log(Object.prototype.hasOwnProperty('toString'));
+
+
+        // 数组的原型链
+        // 任意数组可以看作内置函数Array new出来的
+        // push等一些方法定义在Array.prototype上
+        var arr = new Array(43, 43);
+        var arr1 = [44, 55, 66, 77];
+        console.log(arr1.__proto__ === Array.prototype);
+        console.log(arr1.__proto__.__proto__ === Object.prototype);
+        console.log(Array.prototype.hasOwnProperty('push'));
+    </script>
+</body>
+
+</html>

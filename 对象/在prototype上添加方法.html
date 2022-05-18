@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function People(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+            this.sayHello = function () {
+                console.log('我是' + this.name + '今年' + this.age + '岁了');
+            }
+        }
+        var xiaoming = new People('xiaoming', 14, '男');
+        var xiaohong = new People('xiaohong', 11, '女');
+        console.log(xiaoming.sayHello === xiaohong.sayHello);
+        // 直接定义在类上，不同实例的相同方法占有不同内存，浪费内存。
+        // 直接定在类的prototype上，不同实例的相同方法占有相同内存。
+        function Student(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        Student.prototype.sayHello = function () {
+            console.log('我是' + this.name + '今年' + this.age + '岁了')
+        }
+        var a = new Student('a', 14, '男');
+        var b = new Student('b', 11, '女');
+        console.log(a.sayHello === b.sayHello);
+    </script>
+</body>
+
+</html>
