@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1.Number(), String(), Boolean()的实例都是object类型，它们的PrimitiveValue属性存储它们的本身值，且PrimitiveValue属性不可直接打点访问，因为它是内部属性值。
+        //2.new出来的基本类型值可以正常参与运算。
+        //3.包装类的目的就是为了让基本类型值可以从它们的构造函数的prototype上获得方法。
+        //4.Array()不是数组的包装类，包装类是对基本类型值的面向对象封装。
+        var a = new Number(123);
+        var b = new String('你瞅啥');
+        var c = new Boolean(true);
+        console.log(a);
+        console.log(typeof a);
+        console.log(b);
+        console.log(typeof b);
+        console.log(c);
+        console.log(typeof c);
+        console.log(3 + a);
+    </script>
+</body>
+
+</html>
