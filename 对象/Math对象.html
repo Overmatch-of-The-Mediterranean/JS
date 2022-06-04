@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 四舍五入至小数点后某位
+        var a = 3.687;//四舍五入至小数点第二位3.69
+        console.log(Math.round(a * 100) / 100);
+        // Math.max(), Math.min()分别得到最大最小值
+        console.log(Math.max(22, 33, 44));
+        console.log(Math.min(22, 33, 44));
+        // 利用Math.max(), Math.min()分别求数组中的最大最小值
+        // 利用apply方法，以数组形式传入零散值当作参数
+        var arr = [66, 77, 88, 99];
+        var max = Math.max.apply(null, arr);
+        var min = Math.min.apply(null, arr);
+        console.log(max);
+        console.log(min);
+        // ES6
+        console.log(Math.max(...arr));
+        // 得到[a,b]区间的整数
+        // 用公式:parseInt((Math.random()*(b-a+1))+a)
+    </script>
+</body>
+
+</html>

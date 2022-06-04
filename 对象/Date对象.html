@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Date()日期对象
+        // 第一种方法
+        var a = new Date();
+        console.log(a);
+        // 第二种方法,月份0-11
+        var b = new Date(2022, 9, 4);
+        console.log(b);
+        // 第三种方法:月份和日期必须是两位,月份0-11
+        var c = new Date('2022-05-03');
+        console.log(c);
+        // 日期常见对象的七种方法
+        // 1.getFullYear();
+        // 2.getMonths();0~11
+        // 3.getDate();1~31
+        // 4.getHours();0~23
+        // 5.getMinutes();0~59
+        // 6.getSeconds();0~59
+        // 7.getDay();星期0~6
+
+        // 时间戳表示1970年1月1日零点整至某个时间点的毫秒数
+        // 时间戳的好处:数据库存储日期对象非常麻烦,但存储时间戳这个整数非常方便,用new Date(时间戳)表示确切的时间点
+        // 通过getTime()方法或者Date.parse()函数可将日期对象变为时间戳
+        // 通过new Date(时间戳)可将时间戳变为日期对象
+        var d = new Date();
+        var timestamp1 = d.getTime();//精确到毫秒数
+        var timestamp2 = Date.parse(d);//精确到秒数,但以毫秒形式显示
+        console.log(timestamp1);
+        console.log(timestamp2);
+        // var dd = new Date(1654320344000);
+        var dd = new Date(timestamp2);
+        console.log(dd.getFullYear());
+        console.log(dd);
+    </script>
+</body>
+
+</html>
