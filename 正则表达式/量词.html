@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // *匹配符合前一个字符格式的字符，出现0次或多次，等价于{0,}
+        // +匹配符合前一个字符格式的字符，出现1次或多次，等价于{1,}
+        // ?匹配符合前一个字符格式的字符，出现0次或1次，等价于{0,1}
+        // {n},n为正整数，表示符合格式的字符出现n次;
+        // {n,},n为正整数，表示符合格式的字符至少出现n次;
+        // {n,m},n,m为正整数，表示符合格式的字符至少出现n次,最多出现m次;
+        // 题目
+        // 1.验证11手机号码，且以1开头
+        var regexp = /^1\d{10}$/;
+        var str1 = '18812345678';
+        var str2 = '23435789000';
+        var str3 = '134357890009';
+        console.log(regexp.test(str1));
+        console.log(regexp.test(str2));
+        console.log(regexp.test(str3));
+        // 2.验证以字母开头，中间任意位数字(至少一位)，以字母结尾
+        var regexp1 = /^[a-zA-Z]\d+[a-zA-Z]$/;
+        var str4 = 'A3214b';
+        var str5 = 'dasf';
+        var str6 = 'z1b';
+        console.log(regexp1.test(str4));
+        console.log(regexp1.test(str5));
+        console.log(regexp1.test(str6));
+        // 3.验证网址：www.,中间任意位字符(至少一位)，.com/.com.cn结尾
+        var regexp2 = /^www\..+\.com(\.cn)?$/;
+        var str7 = 'www.4399hhh.com';
+        var str8 = 'dasf';
+        var str9 = 'www..com.cn';
+        console.log(regexp2.test(str7));
+        console.log(regexp2.test(str8));
+        console.log(regexp2.test(str9));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        span {
+            display: none;
+            color: red;
+        }
+
+        input {
+            height: 25px;
+        }
+
+        ul li {
+            font-size: 20px;
+            list-style: none;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <ul>
+            <li>请输入中文姓名：<input type="text" id="nameField">
+                <span id="warning1">输入的姓名不合法</span>
+            </li>
+            <li>
+                请输入手机号码：<input type="text" id="telField">
+                <span id="warning2">输入的手机号不合法</span>
+            </li>
+            <li>
+                请输入电子邮箱：<input type="text" id="emailField">
+                <span id="warning3">输入的email不合法</span>
+            </li>
+        </ul>
+
+
+
+    </form>
+    <script>
+        var nameField = document.getElementById('nameField');
+        var telField = document.getElementById('telField');
+        var emailField = document.getElementById('emailField');
+        var namewarning = document.getElementById('warning1')
+        var telwarning = document.getElementById('warning2')
+        var emailwarning = document.getElementById('warning3')
+
+
+
+        nameField.onblur = function () {
+            var name = nameField.value;
+            if (/^[\u4e00-\u9fa5]{2,4}$/.test(name)) {
+                namewarning.style.display = 'none';
+            } else {
+                namewarning.style.display = 'inline';
+            }
+        }
+        telField.onblur = function () {
+            var tel = telField.value;
+            if (/^1\d{10}$/.test(tel)) {
+                telwarning.style.display = 'none';
+            } else {
+                telwarning.style.display = 'inline';
+            }
+        }
+        emailField.onblur = function () {
+            var email = emailField.value;
+            if (/^\w{2,}\@\w{2,}\.[a-z]{2,4}(\.[a-z]{2,4})?$/.test(email)) {
+                emailwarning.style.display = 'none';
+            } else {
+                emailwarning.style.display = 'inline';
+            }
+        }
+    </script>
+</body>
+
+</html>

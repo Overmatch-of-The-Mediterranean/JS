@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // test()方法：测试字符串格式是否符合正则表达式，返回布尔值
+        // exec()方法：根据正则表达式在字符串中查找，返回结果数组或null，即匹配搜索查找
+        // exec()方法的逐条便利：有g修饰符的正则表达式将自动变为有状态的，这意味着可以对单个字符串中的多次匹配结果进行逐条的便利,相当于有迭代效果，记录位置
+        var str = 'abc123def456ghi789'
+        var regexp = /[a-z]+/g;//+表示贪婪的，尽可能多的匹配
+        console.log(regexp.exec(str));
+        var result;
+        while (result = regexp.exec(str)) {
+            console.log(result[0]);
+        }
+    </script>
+</body>
+
+</html>

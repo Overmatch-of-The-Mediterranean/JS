@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 正则表达式描述了字符串的“构成模式”，被用作检查字符串是否符合预定的格式要求
+        // 正则表达式“按位”规则描述，是指它是一位一位的描述字符串的构成形式
+        // 正则表达式的创建方法：
+        // 1./内容/
+        // 2.使用new RegExp('内容')形式创建
+        // typeof检查正则表达式结果是object
+        var regexp1 = /^\d{6}$/;
+        var regexp2 = new RegExp('^\\d{6}$');
+        var a = '123456';
+        console.log(regexp1.test(a));
+        console.log(regexp2.test(a));
+    </script>
+</body>
+
+</html>

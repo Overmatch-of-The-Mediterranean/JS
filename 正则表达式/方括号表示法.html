@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // [内容]，表示字符是否是集合中的任意一个
+        // 格式：b本科生，y研究生后面跟七个数字的学号
+        var regexp = /^[by]\d{7}$/;
+        var str1 = 'b1234567';
+        var str2 = 'by1234567';
+        console.log(regexp.test(str1));
+        console.log(regexp.test(str2));
+        // []高级用法,-表示范围，^表示否定
+        // \d等同[0 - 9];
+        // \D等同[^ 0 - 9];
+        // \w等同[a - zA - z0 -9_]
+        // \W等同[^ a - zA - z0 -9_]
+        // 题目
+        //验证某字符串是否是五位字母，大小写均可
+        var regexp1 = /^[a-zA-Z]{5}$/
+        var str3 = 'dasGF';
+        var str4 = 'dsa12';
+        console.log(regexp1.test(str3));
+        console.log(regexp1.test(str4));
+        //验证某字符串是否是五位，且仅由小写字母和.构成
+        var regexp2 = /^[a-z\.]{5}$/;
+        var str5 = 'a..as';
+        var str6 = 'das6.';
+        console.log(regexp2.test(str5));
+        console.log(regexp2.test(str6));
+        //验证某字符串是否是4位小写字母，且最后一位不是m
+        var regexp3 = /^[a-z]{3}[a-ln-z]$/;
+        var str7 = 'dase';
+        var str8 = 'dsam';
+        console.log(regexp3.test(str7));
+        console.log(regexp3.test(str8));
+    </script>
+</body>
+
+</html>

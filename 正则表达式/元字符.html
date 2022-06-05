@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // \d匹配一个数字
+        // \D匹配一个非数字字符
+        // \w匹配一个单字字符(字母，数字，下划线)
+        // \W匹配一个非单字字符
+        // \s匹配一个空白字符，如空格，制表符，换行符
+        // .匹配任意字符
+        // ^匹配开头，$匹配结尾
+
+        // 运单号形式：123 - 4567 - 890;
+        var regexp = /^\d{3}-\d{4}-\d{3}$/;
+        var regexp1 = new RegExp('^\\d{3}-\\d{4}-\\d{3}$')
+        var str1 = '547-7869-001';
+        var str2 = '547-7869-0011';
+        console.log(regexp.test(str1));
+        console.log(regexp.test(str2));
+        console.log(regexp1.test(str1));
+        console.log(regexp1.test(str2));
+        // 验证密钥：？？？-？？？？-？？？，？表示字母数字或下划线
+        var regexp2 = /^\w{3}-\w{4}-\w{3}$/;
+        var str3 = 'wsn-ds12-_w2';
+        console.log(regexp2.test(str3));
+
+        // 字符的转义：在特殊字符之前加一个\就可以变成字面意思，如/^\.$/,不管符号有没有特殊意义，都可以在其前面加上一个\，确保是符号本身
+        var regexp3 = /^\d{3}\.\d\d\#\d\d\^\d\d$/;
+        var str4 = '123.45#67^89';
+        var str5 = '123.45_67^89';
+        console.log(regexp3.test(str4));
+        console.log(regexp3.test(str5));
+    </script>
+</body>
+
+</html>
