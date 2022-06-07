@@ -5,10 +5,12 @@
     var ol_circles = document.getElementById('circles');
     var ol_lis = ol_circles.getElementsByTagName('li');
     var cloneli = carousel_list.firstElementChild.cloneNode(true);
+    var banner = document.getElementById('banner');
     carousel_list.appendChild(cloneli);
     var idx = 0;
     var lock = true;
-    rightbtn.onclick = function () {
+    rightbtn.onclick = rightbtn_handler;
+    function rightbtn_handler() {
         if (!lock) return;
         lock = false;
         idx++;
@@ -65,5 +67,20 @@
             carousel_list.style.transform = 'translateX(' + -16.66 * idx + '%)';
             setCircle();
         }
+    }
+    var timer = setInterval(rightbtn_handler, 2000);
+    banner.onmouseenter = function () {
+        clearInterval(timer);
+    }
+    banner.onmouseleave = function () {
+        clearInterval(timer);
+        timer = setInterval(rightbtn_handler, 2000);
+    }
+    ol_circles.onmouseenter = function () {
+        clearInterval(timer);
+    }
+    ol_circles.onmouseleave = function () {
+        clearInterval(timer);
+        timer = setInterval(rightbtn_handler, 2000);
     }
 })()
