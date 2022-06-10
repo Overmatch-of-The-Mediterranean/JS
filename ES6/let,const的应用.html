@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 50px 0 0 50px;
+        }
+
+        button {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn">0</button>
+    <button class="btn">1</button>
+    <button class="btn">2</button>
+    <script>
+        // var btns = document.querySelectorAll('.btn');
+        //这里的i输出的是全局变量，循环结束后i=3.
+        // for (var i = 0; i < btns.length; i++) {
+        //     btns[i].addEventListener('click', function () {
+        //         console.log(i);
+        //     }, false)
+        // }
+        //2.闭包实现
+        // for (var i = 0; i < btns.length; i++) {
+        //     (function (index) {
+        //         btns[i].addEventListener('click', function () {
+        //             console.log(index);
+        //         }, false)
+        //     })(i)
+        // }
+        //3.let/const   用到作用域的向外传递，此案例：函数作用域->块级->全局
+        let btns = document.querySelectorAll('.btn');
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].addEventListener('click', function () {
+                console.log(i);
+            }, false)
+        }
+
+    </script>
+</body>
+
+</html>

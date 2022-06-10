@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let用来声明变量,可以重新赋值;
+        // const用来声明常量，声明的常量及其赋值要同步。
+        // 在不确定值是否修改，可以先用const声明
+        // const允许在不重新赋值的情况下修改值。基本类型值只能通过复制改变值，引用类型值可以不重新赋值的情况下修改值。
+        const obj = {
+            a: 1
+        }
+        obj.a = 2;
+        console.log(obj);
+
+        // let,const与var的区别：有五个
+        // 1.重复定义，var允许重复定义;let,const不允许重复定义，会报错.
+        // 2.变量声明提升，var允许变量声明提升，let,const不允许变量声明提升。
+        // 3.暂时性死区：作用域内存在let，const定义的变量，都只在该作用域生效。var定义的变量为全局变量，不存在暂时性死区。
+        // 4.window对象的属性和方法，var定义的变量与function定义的函数，都会变成window对象的属性或方法(例如，函数上下文规则2);let，const定义的量不会摄入window对象中。
+        // 5.块级作用域：var没有块级作用域，let与const有块级作用域(像局部变量使用完被释放)。
+        // 作用域有全局作用域，函数作用域，块级作用域。其中函数作用域只有在被调用时才有。
+        for (let i = 0; i < 3; i++) {
+            console.log(i);
+        }
+        // console.log(i);报错
+
+        // 作用域链：寻找变量由内到外，不能由外到内
+        function fun() {
+            for (let i = 0; i < 3; i++) {
+                console.log(i);
+            }
+            console.log(i);//只能再函数体中第一层关系中寻找，不能深入关系寻找。
+        }
+        fun();
+        console.log(i);
+        // 块级作用域有哪些：带{}的大多数都由块级作用域，对象除外，但对象里面的方法可有块级作用域。
+    </script>
+</body>
+
+</html>
