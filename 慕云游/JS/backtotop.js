@@ -1,6 +1,7 @@
 (function () {
     var backtotop = document.getElementById('backtotop');
-    var banner = document.getElementById('banner')
+    // var banner = document.getElementById('banner')
+    var banner1 = document.getElementById('banner1')
     var timer;
 
     backtotop.onclick = function () {
@@ -12,7 +13,7 @@
             }
         }, 20)
     }
-    banner.onmousewheel = function () {
+    banner1.onmousewheel = function () {
         clearInterval(timer);
     }
     window.onscroll = function () {
