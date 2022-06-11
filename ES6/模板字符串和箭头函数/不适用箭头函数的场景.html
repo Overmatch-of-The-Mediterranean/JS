@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.构造函数，因为构造函数new四步走中，需要指向实例
+        const Person = () => { };
+        new Person();//此时Person不是构造函数，会报错。
+        // 2.需要this指向调用函数的对象时
+        // 3.需要使用arguments的时候，箭头函数中没有arguments
+    </script>
+</body>
+
+</html>

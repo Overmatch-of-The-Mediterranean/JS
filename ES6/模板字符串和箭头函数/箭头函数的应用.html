@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">开始</button>
+    <span id="result">0</span>
+    <script>
+        const btn = document.getElementById('btn');
+        const result = document.getElementById('result');
+        // 无箭头函数
+        // const timer = {
+        //     time: 0,
+        //     start: function () {
+        //         self = this;
+        //         btn.addEventListener('click', function () {
+        //             setInterval(function () {
+        //                 self.time++;
+        //                 result.innerText = self.time;
+        //             }, 1000)
+        //         }, false)
+        //     }
+        // }
+        // timer.start();
+        // 使用箭头函数
+        let lock = true
+        const timer = {
+            time: 0,
+            start: function () {
+                btn.addEventListener('click', () => {
+                    if (!lock) return;
+                    lock = false;
+                    setInterval(() => {
+                        this.time++;
+                        result.innerText = this.time;
+                    }, 1000)
+                }, false)
+            }
+        }
+        timer.start();
+    </script>
+</body>
+
+</html>

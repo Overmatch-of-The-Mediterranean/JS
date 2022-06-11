@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 'use strict';
+        // 箭头函数没有自己的this指向，this通过作用域链寻找对象。
+
+        const obj = {
+            add: () => {
+                console.log(this);
+            }
+        }
+        obj.add();//非'use strict'模式下，不知道谁调用指向undefined,然后undefined->window,严格模式下则指向undefined
+
+        // 练习
+        const calc = {
+            add: function () {
+                const adder = () => {
+                    console.log(this);
+                }
+                adder();
+            }
+        }
+        calc.add();
+    </script>
+</body>
+
+</html>

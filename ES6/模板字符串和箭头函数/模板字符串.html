@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 模板字符串用反引号``包裹，一般字符串用''。
+        // 模板字符串与一般字符串的区别：字符串的拼接
+        const student = {
+            name: '小明',
+            age: 18,
+            sex: '男'
+        }
+        const info = `我的名字是${student.name},性别${student.sex},今年${student.age}岁`;
+        console.log(info);
+        // 模板字符串注意事项：
+        // 1.输出多行字符串，模板字符串中，所有的空格，换行，缩进都会被保留在输出中
+        const info1 = '第一行\n第二行'//一般字符串
+        console.log(info1);
+        const info2 = `第一行
+        第二行`
+        console.log(info2);
+        // 2.输出`和\等特殊字符，需要在特殊字符前加\转义符，对于模板字符串，单引号'不是特殊字符，对于一般字符串来说则相反。
+        const info3 = `'\`\\`;
+        console.log(info3);
+        // 3.模板字符串的注入，只要最终是值就可注入
+        const username = '小强';
+        const person = {
+            age: 18,
+            sex: 'male'
+        }
+        const getSex = function (sex) {
+            return sex === 'male' ? '男' : '女';
+        }
+        const info5 = `${username},${person.age},${getSex(person.sex)}`;
+        console.log(info5);
+
+    </script>
+</body>
+
+</html>

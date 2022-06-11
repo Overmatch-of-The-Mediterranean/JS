@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 箭头函数结构：let/const 函数名 = ()=>{}
+        // 一般函数转换成箭头函数：function fun() {},去掉关键字，以及名字
+        // 改为 let fun = ()=>{}
+        let fun = (x, y) => {
+            return x + y;
+        }
+        console.log(fun(1, 1));
+        // 箭头函数注意事项，即化简。
+        // 1.单个参数
+        let fun1 = x => {
+            return x + 1
+        }
+        console.log(fun1(1));
+        // 单行函数体
+        let fun2 = (x, y) => x + y// {}和return要一起去掉
+        console.log(fun2(1, 1));
+        // 单行对象
+        let fun3 = x => ({ // 因为函数的{}与对象的{}有歧义，所以应该用()将对象包裹起来。
+            value: x
+        })
+        console.log(fun3(1));
+        // 数组
+        let fun4 = (x, y) => [x, y]; // []不会引起歧义
+        console.log(fun4(1, 1));
+        let fun5 = x => x + 1;
+        console.log(fun5(5));
+    </script>
+</body>
+
+</html>
