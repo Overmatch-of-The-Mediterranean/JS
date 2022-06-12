@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>我是1</p>
+    <p>我是2</p>
+    <p>我是3</p>
+    <script>
+        // 解构赋值：解析某一数据的结构，将我们想要的东西提取出来，赋值给变量或常量。
+        // 数组解构赋值的原理：
+        // 1.模式(结构)匹配
+        // 2.索引值相同的完成赋值
+        // const [a, b, c] = [1, 2, 3];
+        // console.log(a, b, c);
+        // const [a, [, b,], c] = [1, [2, 3, 4], 5];
+        // console.log(a, b, c);
+        // 数组解构赋值的默认值：不设置默认值时，默认值为undefined
+        // 1.默认值的基本用法
+        const [d = 1, e] = [];
+        console.log(d, e);
+        // 2.默认值的生效条件：只有当一个数组成员全等于(===)undefined时，对应的默认值才会生效
+        // null==undefined为true，null===undefined为false
+        const [a = 1, b = 2] = [3, null];
+        console.log(a, b);
+        // 3.默认值表达式
+        // 如果默认值时表达式,默认值表达式是惰性求值的,即,用不到就不执行
+        const func = () => console.log('我被执行了');
+        // const [x = func()] = [1];
+        const [x = func()] = [];
+        console.log(x);
+        // 数组的解构赋值的应用
+        // 1.常见类数组的解构赋值  arguments,NodeList
+        function fun() {
+            console.log(arguments);
+        }
+        fun(6, 6);
+        //NodeList
+        const [p1, p2, p3] = document.querySelectorAll('p');
+        console.log(p1, p2, p3);
+        // 函数参数的解构赋值
+        const add = ([x = 1, y = 1]) => console.log(x + y);
+        add([1, 5]);
+        add([])
+        // 交换变量的值
+        let n = 1;
+        let m = 2;
+        [n, m] = [m, n];//这里不能理解为m赋值给n,这样n的值会变,第二个赋值就乱了,可以理解为右边[]会先求值然后取代右边[]中的量.
+        console.log(n, m);
+    </script>
+</body>
+
+</html>
