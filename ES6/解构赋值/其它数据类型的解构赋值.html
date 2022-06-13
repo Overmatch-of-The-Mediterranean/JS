@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.字符串的解构赋值，数组型与对象型都可以用
+        // const [A, B, , D] = 'abcd';
+        // console.log(A, B, D);
+        const { 0: a, 3: c, length } = 'abcd';// 字符串的属性名就是索引值,length也是字符串的属性
+        console.log(a, c, length);
+        // 2.数值或布尔值的解构赋值：系统会用new Number()或new Boolean()先将其转化为空{}对象形式
+        // const { m = 1, n } = 123;
+        // console.log(m, n);
+        const { m = 1, n } = true;
+        console.log(m, n);
+        // 3.undefined或null的解构赋值：因为undefined和null没有相应的函数，所以无法转换为对象，对它们解构赋值会报错。
+    </script>
+</body>
+
+</html>

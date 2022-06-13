@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 对象解构赋值的原理
+        // 1.模式匹配
+        // 2.属性名相同的完成赋值
+        const { age: age, name: mz } = { name: 'xiaoming', age: 18 };
+        console.log(mz, age);
+        const { a, b } = { a: 1, b: 2 };//若属性名与变/常量名相同，可以简写
+        console.log(a, b);
+
+
+        // 对象解构赋值的注意事项：
+        // 1.默认值生效条件：只有当属性值全等于(===)undefined时，对应的默认值才会生效。
+        // 2.默认值表达式与数组的一样
+        const func = (e, f) => console.log(e, f);
+        const { name: e = func(0, 3) } = {};
+        console.log(e);
+        // // 3.已经声明的变量用于解构赋值，整体需要用()包裹
+        // let x;
+        // ({ x } = { x: 6 });
+        // console.log(x);
+        // 4.对象解构赋值可以取到继承的属性或方法
+        const { toString } = {};//这个空的{}相当于一个实例，继承了object.prototype的属性或方法，属性可以通过原型链找到。
+        console.log(toString);
+
+
+        // 对象解构赋值的应用
+        // 1.函数参数的解构赋值
+        const fun = ({ name, age }) => console.log(name, age);
+        fun({ name: 'xiaoming', age: 18 });
+        // 2.复杂的嵌套
+        const obj = {
+            x: 2,
+            y: [4, 5, 6],
+            z: {
+                m: 7,
+                n: 8
+            }
+        }
+        // 属性名只起对应关系的作用，赋值是:右边。
+        const {
+            x,
+            y,
+            y: [, , y1],
+            z: {
+                m,
+                n
+            }
+        } = obj;
+        console.log(x, y, y1, m, n);
+    </script>
+</body>
+
+</html>
