@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 函数默认值生效条件：只有当实参为空或实参为undefined时，函数参数默认值才会生效
+        // 默认值表达式和解构赋值一样
+        const fun = (x, y = 2) => x + y;
+        console.log(fun(1));
+        console.log(fun(1, null));
+        // 小经验：函数默认值赋值从右向左
+        const func = (a = 1, b) => console.log(a + b);//若从左向右，则想让默认值生效必须要写undefined，不能空着
+        // func(, 1); 报错
+        func(undefined, 5)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 接收很多参数时，可以接收一个对象作为参数，函数参数默认值是整体，解构赋值是个体
+        const fun = ({ user = '嗨嗨嗨', age = '0', sex = 'male' } = {}) => {  //相当于下面这个，下面的options是个对象
+            console.log(user, age, sex);
+        }
+        // const fun = (options = {}) => {
+        //     console.log(user, age, sex);
+        // }
+        fun();//当什么都不传时，参数默认值是空对象，相当于解构赋值{ user = '嗨嗨嗨', age = '0', sex = 'male' } = {}，默认值生效。
+
+
+        const func = ({ user = '嗨嗨嗨', age = '0', sex = 'male' }) => {
+            console.log(user, age, sex);
+        }
+        func({ user: '嗨嗨嗨', age: '0', sex: 'male' });
+        func();//这种情况下，如果什么都不传，参数的默认值为undefined，相当于{ user = '嗨嗨嗨', age = '0', sex = 'male' }=undefined,解构赋值中可以知道，用undefined和null进行赋值会报错
+    </script>
+</body>
+
+</html>

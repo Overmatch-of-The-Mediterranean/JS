@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 方括号语法的用法：可以写在对象字面量中，属于ES6中方括号语法的增强
+        // 方括号里面可以放什么：可以放值或通过计算可以得到值的(表达式)
+        const n = 'age';
+        const fun = () => 'height'
+        const obj = {
+            [n]: 18,
+            ['sex']: 'male',
+            ['wei' + 'ght']: 140,
+            [fun()]: '不告诉你'
+        }
+        console.log(obj);
+        // 点语法与方括号语法的区别：点语法是方括号语法的特殊形式，符合JS命名规范的可以使用点语法，其他情况使用方括号语法
+
+    </script>
+</body>
+
+</html>

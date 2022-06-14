@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.完成加法器
+        // const add = (...args) => {
+        //     let sum = 0;
+        //     for (let i = 0; i < args.length; i++) {
+        //         sum += args[i];
+        //     }
+        //     console.log(sum);
+        // }
+        // add(1, 2, 3, 4);
+        // 利用数组的方法，使代码更简单，证明剩余参数比arguments要好
+        const add = (...args) => {
+            let sum;
+            sum = args.reduce((a, b) => a + b);
+            console.log(sum);
+        }
+        add(1, 2, 3, 5);
+
+        // 2.与解构赋值结合使用：剩余参数不一定非得作为函数参数使用
+        // 与数组结合使用
+        const fun = ([x, ...args]) => console.log(x, args);
+        fun([1, 2, 3, 4, 5, 6])
+        // 与对象解构赋值结合使用时，剩余参数形式变为对象
+        const func = ({ a, ...args1 }) => console.log(a, args1);
+        func({ b: 2, a: 1, c: 3, d: 4 });
+    </script>
+</body>
+
+</html>
