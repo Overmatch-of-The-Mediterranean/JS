@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Set是一系列无序，没有重复值的数据集合
+        // Set只能通过new Set()创建
+        // Set实例的方法和属性
+        // 1.add()：一次只能添加一个数据，可以连缀
+        const s = new Set([1, 2]);
+        s.add(3).add(4)
+        console.log(s);
+        // 2.has()：判断是否含有某数据
+        console.log(s.has(1));
+        console.log(s.has(5));
+        // 3.delete()：删除某个数据，使用其删除不存在的数据，什么都不会发生，也不会报错
+        s.delete(4);
+        console.log(s);
+        // 4.clear：清除所有数据
+        s.clear();
+        console.log(s);
+        // 5.forEach(function () {},回调函数中this指向)，有两个参数。forEach遍历的顺序是数据添加的顺序
+        // 回调函数中的参数function (value,key,set) {}，Set中value=key，set是指实例化的
+        const e = new Set([1, 2]);
+        e.forEach(function (value, key, set) {
+            console.log(value, key, set === e);
+            console.log(this);
+        }, document)
+        // 属性size，得到集合中元素的个数
+
+
+        // Set构造函数的参数可以放数组，类数组，字符串，set实例
+        const t = new Set([1, 2, 3]);
+        function fun() {
+            console.log(new Set(arguments));
+        }
+        fun(5, 6, 7);
+        console.log(new Set('abcd'));
+        console.log(new Set(t));
+    </script>
+</body>
+
+</html>

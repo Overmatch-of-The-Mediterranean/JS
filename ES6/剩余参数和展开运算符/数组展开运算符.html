@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+        // 数组展开运算符：[1,2,3]->1,2,3
+        const arr = [1, 2, 3,];
+        const arr1 = [4, 5];
+        const arr2 = [6];
+        console.log(...arr);// 数组的展开
+        console.log([...arr, ...arr1, ...arr2]);
+
+        // 区别剩余参数和展开运算符
+        // 剩余参数1，2，3->[1,2,3]
+        // 展开运算符：[1,2,3]->1,2,3
+        console.log([...[1, 2, 3], 4]);
+
+        //数组展开运算符的应用
+        // 1.数组的复制
+        const arr3 = [...arr];
+        console.log(arr3);
+        // 2.合并数组
+        console.log([0, ...arr, ...arr1, ...arr2, 7]);
+        // 3.字符串转为数组(字符串可以看作一个类数组)
+        // 字符串颠倒
+        const name = '你瞅啥';
+        console.log([...name]);
+        let rename = [...name].reverse()
+        console.log(...rename);
+        // 4.常见的类数组转化为数组 arguments,NodeList
+        function fun() {
+            console.log(arguments);
+            console.log([...arguments]);
+        }
+        fun(9, 8, 7, 6);
+        let NodeList = document.querySelectorAll('p');
+        console.log(NodeList)
+        console.log(NodeList.push);
+        console.log([...NodeList])
+        console.log([...NodeList].push);
+    </script>
+</body>
+
+</html>

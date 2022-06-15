@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 展开对象：对象不能直接展开，需要在{}内展开
+        const apple1 = {
+            color: '红色',
+            taste: '甜',
+            shape: '圆形'
+        }
+        const pen1 = {
+            shape: '圆柱形',
+            color: '黑色',
+            use: '写字'
+        }
+        console.log({ ...apple1 } === apple1);
+        // 合并对象
+        console.log({ ...apple1, ...pen1 });
+        console.log({ apple1, pen1 });// 属性的简洁表示法
+
+
+        // 对象展开运算符注意事项
+        // 1.对空对象的展开
+        console.log({ ...{} });
+        console.log({ ...{} } === {});
+        console.log({ ...{}, ...apple1 });
+        // 2.非对象的展开
+        // 如果展开的不是对象，则会自动将其转换为对象，再将其属性罗列出来
+        console.log({ ...1 });
+        console.log({ ...undefined });
+        console.log({ ...null });
+        console.log(new Object(undefined));
+        console.log(new Object(null));
+        // 3.如果展开的是字符串，会先将其转换为类数组对象，属性名是其对应的索引值
+        console.log({ ...'嗨嗨嗨' });
+        // 4.对象中对象属性的展开：展开运算符不能直接展开嵌套的对象，需要打点然后展开
+        const apple = {
+            feature: {
+                taste: '甜'
+            }
+        }
+        const pen = {
+            feature: {
+                shape: '圆柱形',
+                color: '黑色'
+            },
+            use: '写字'
+        }
+        console.log({ ...apple.feature, ...pen });
+        console.log({ ...apple.feature, ...pen.feature, use: '写字' });
+        console.log({ ...pen.feature });
+    </script>
+</body>
+
+</html>

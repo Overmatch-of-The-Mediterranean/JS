@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+        // Set的注意事项
+        // 1.判断重复的方式:Set对重复值的判断遵循全等(===),NaN是个特殊例子,在set中两个NaN相等,但在普通判断中既不相等,也不全等,引用类型值在set中也不相等
+        const s = new Set([NaN, 2, NaN]);
+        console.log(NaN == NaN);
+        console.log(s);
+        // 2.什么时候使用Set
+        // (1).数组或字符串去重时
+        // (2).不需要下标访问,进行遍历
+        // (3).为了使用Set的方法或属性
+
+        // Set的应用
+        // 1.数组的去重
+        console.log([...s]);
+        // 2.字符串去重
+        console.log([...new Set('aabbccdd')].join(''));
+        // 3.存放DOM元素
+        const t = new Set(document.querySelectorAll('p'));
+        console.log(t);
+        t.forEach(function (elem) {
+            elem.style.color = 'red';
+            elem.style.backgroundColor = 'yellow';
+        })
+    </script>
+</body>
+
+</html>
