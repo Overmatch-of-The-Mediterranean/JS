@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Map的本质时键值对的集合，只能通过实例化来创建
+        // Map和对象的区别：对象一般是字符串当键，Map基本，引用都可以当键
+        // Map的属性和方法
+        // 1.set()与get()
+        const m = new Map();
+        m.set('name', '嗨嗨嗨').set('age', 18);
+        console.log(m);
+        console.log(m.get('name'));
+        // 2.has()
+        console.log(m.has('age'));
+        console.log(m.has(true));
+        // 3.delete()
+        console.log(m.delete('age'));// 输出true
+        console.log(m);
+        // 4.clear()
+        console.log(m.clear());//输出undefined
+        console.log(m);
+        // 5.forEach(function(value,key,map){},this指向)
+        const a = new Map([
+            ['name', 'lihua'],
+            ['age', 18]
+        ]);
+        a.forEach(function (value, key, map) {
+            console.log(value, key, map === a);
+        })
+        // 属性size
+        console.log(m.size);
+
+        // Map的参数：数组，set，map
+        const p = new Map([
+            ['name', 'hhh'],
+            [true, 1]
+        ])
+        const s = new Set([
+            ['name', 'yahu'],
+            [true, 1]
+        ]);
+        console.log(s);
+        const map1 = new Map(s);
+        console.log(map1);
+        const map2 = new Map(p);
+        console.log(map2);
+    </script>
+</body>
+
+</html>

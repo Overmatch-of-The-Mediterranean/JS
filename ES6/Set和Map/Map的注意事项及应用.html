@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+        // Map的注意事项
+        // 1.如何判断键名是否相同：NaN在map和set中相等，只不过在map中相同键名出现，后者覆盖前者。
+        const s = new Map([
+            ['NaN', '嗨嗨嗨'],
+            [true, 1],
+            ['NaN', 'zzz']
+        ])
+        console.log(s);
+        // 2.什么时候使用Map
+        // (1).在只需要键值对，或需要用字符串以外的值作为键时
+        // (2).需要使用Map的属性或方法时
+        // 只有在模拟现实中的实物时，才使用对象
+
+
+        // Map的应用
+        const [p1, p2, p3] = document.querySelectorAll('p');
+        // const m = new Map();
+        // m.set(p1, 'red').set(p2, 'green').set(p3, 'blue');
+        // const m1 = new Map([
+        //     [p1, 'red'],
+        //     [p2, 'green'],
+        //     [p3, 'blue']
+        // ])
+        // m1.forEach((color, elem) => {
+        //     elem.style.color = color;
+        // })
+
+
+        //使用对象做
+        // const m = new Map([
+        //     [p1, {
+        //         color: 'red',
+        //         backgroundColor: 'yellow'
+        //     }],
+        //     [p2, {
+        //         color: 'green',
+        //         backgroundColor: 'pink'
+        //     }],
+        //     [p3, {
+        //         color: 'blue',
+        //         backgroundColor: 'orange'
+        //     }]
+        // ]);
+        // m.forEach(function (obj, elem) {
+        //     for (var p in obj) {
+        //         elem.style[p] = obj[p];
+        //     }
+        // })
+
+        //使用Map做
+        const m = new Map([
+            [p1, new Map([
+                ['color', 'red'],
+                ['backgroundColor', 'yellow']
+            ])],
+            [p2, new Map([
+                ['color', 'green'],
+                ['backgroundColor', 'pink']
+            ])],
+            [p3, new Map([
+                ['color', 'blue'],
+                ['backgroundColor', 'orange']
+            ])]
+        ]);
+        m.forEach(function (map, elem) {
+            // map.forEach((value, key) => {
+            //     elem.style.eval(key) = value;
+            // })// key怎么转化成变量，这个方案还没解决
+            elem.style.color = map.get('color');
+            elem.style.backgroundColor = map.get('backgroundColor');
+        })
+    </script>
+</body>
+
+</html>
