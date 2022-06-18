@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // for of循环的本质，下面的代码相当于是它的封装
+        let arr = [1, 2, 3];
+        let it = arr[Symbol.iterator]();
+        let next = it.next();
+        while (!next.done) {
+            next = it.next();
+            console.log(next);
+        }
+        // for of循环只会遍历出那些done为false时，对应的value值
+        for (const value of arr) {
+            console.log(value);
+        }
+        // 与break，continue一起使用
+        for (const value1 of arr) {
+            if (value1 == 2) {
+                continue;
+            }
+            console.log(value1);
+        }
+        // 在for of中获得数组的索引
+        for (const value2 of arr.keys()) {
+            console.log(value2);
+        }
+        // entries()得到索引+值组成的数组的可遍历对象
+        for (const value3 of arr.entries()) {
+            console.log(value3);
+        }
+    </script>
+</body>
+
+</html>

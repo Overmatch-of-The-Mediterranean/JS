@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+        // Iterator是一个统一的遍历方式,一般不会直接使用它去遍历，而是会使用for of循环
+        // Symbol.Iterator()(可遍历对象的生成方法)->it可遍历对象->it.next()->it.next()->done为true
+        let arr = [1, 2, 3];
+        let it = arr[Symbol.iterator]();
+        console.log(it.next());
+        console.log(it.next());
+        console.log(it.next());
+        console.log(it.next());
+        // 可遍历：只要有Symbol.iterator方法，并且这个方法可以生成可遍历对象，就是可遍历的。
+        // 原生可遍历：数组，类数组，字符串，set，map
+        for (const item of new Set([4, 5, 6])) {
+            console.log(item);
+        }
+        for (const item of document.querySelectorAll('p')) {
+            console.log(item);
+            item.style.color = 'red';
+        }
+        // 非原生可遍历：一般的对象
+        // 可以人为加上[Symbol.iterator]()，然后使用for of循环
+        let people = {
+            name: 'lihua',
+            age: 18
+        };
+        people[Symbol.iterator] = () => {
+            let index = 0;
+            return {
+                next() {
+                    index++;
+                    if (index == 1) {
+                        return {
+                            value: people.name,
+                            done: false
+                        }
+                    } else if (index == 2) {
+                        return {
+                            value: people.age,
+                            done: false
+                        }
+                    } else {
+                        return {
+                            done: true
+                        }
+                    }
+                }
+            }
+        }
+        for (const item of people) {
+            console.log(item);
+        }
+
+        // 有length和索引属性的对象
+        const obj = {
+            0: 'hhh',
+            1: '18',
+            length: 2
+        };
+        // obj[Symbol.iterator] = () => {
+        //     let index = 0;
+        //     let value, done
+        //     return {
+        //         next() {
+        //             if (index < obj.length) {
+        //                 value = obj[index];
+        //                 done = false;
+        //             } else {
+        //                 value = undefined;
+        //                 done = true;
+        //             }
+        //             index++;
+        //             return {
+        //                 value,
+        //                 done
+        //             }
+        //         }
+        //     }
+        // }
+        // 有length和索引属性的对象更简单的方法
+        obj[Symbol.iterator] = Array.prototype[Symbol.iterator];// 直接赋值
+        for (const item1 of obj) {
+            console.log(item1);
+        }
+
+        // 使用了Iterator的场合
+        // 1.数组的展开运算符。只要是可遍历的就可以使用数组的展开运算符
+        // 2.数组的解构赋值。只要是可遍历的就可以使用数组的解构赋值
+        // 3.Set和Map的构造函数
+        // Set和Map接收的是iterator，只要是可遍历的都可以接收
+        // new Set(iterator);
+        // new Map(iterator);  Map(iterator)中一般是二维数组，要体现出键和值
+    </script>
+</body>
+
+</html>
