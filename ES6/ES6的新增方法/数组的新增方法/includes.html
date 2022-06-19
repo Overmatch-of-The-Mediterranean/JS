@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 用来判断数组是否含有某个成员。第二个参数表示开始搜索的位置
+        console.log([1, 2].includes(1));
+        // 判断基本遵循===，但对于NaN的判断与===不同，includes认为NaN===NaN。
+        console.log([1, NaN].includes(NaN));
+        console.log([1, NaN].includes(NaN, 2));
+        // 应用：去重
+        let arr = [];
+        for (const item of [1, 2, 1]) {
+            if (arr.includes(item) != true) {
+                arr.push(item);
+            }
+        }
+        console.log(arr);
+    </script>
+</body>
+
+</html>

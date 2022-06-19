@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Object.assign(目标对象, 源对象1, 源对象2, ...)，从后往前一个一个合并
+        // 用来合并对象
+        const apple = {
+            color: '红色',
+            shape: '圆形',
+            taste: '甜'
+        };
+        const pen = {
+            color: '黑色',
+            shape: '圆柱形',
+            use: '写字'
+        }
+        // Object.assign直接合并到第一个参数中，返回的是合并后的对象，
+        console.log(Object.assign(apple, pen));//在apple上发生变化
+        console.log(apple);
+        console.log(Object.assign(apple, pen) === apple);
+        // 想要返回一个新对象
+        console.log(Object.assign({}, apple, pen));
+        console.log(Object.assign({}, apple, pen) === apple);
+        console.log({ ...apple, ...pen });
+
+        // 注意事项
+        // 1.基本数据类型作为源对象
+        // 与对象展开类似，先转换成对象，再合并
+        console.log(Object.assign({}, undefined));
+        console.log(Object.assign({}, 'str'));
+        // 2.同属性名的替换，后面的直接覆盖前面的
+        // 3.应用：合并默认参数与用户参数
+        const user = user => {
+            const Defaults = {
+                name: 'zhangsan',
+                age: 18,
+                sex: 'male'
+            };
+            const options = Object.assign({}, Defaults, user);
+            console.log(options);
+        };
+        user({ name: '嗨嗨嗨' });
+    </script>
+</body>
+
+</html>

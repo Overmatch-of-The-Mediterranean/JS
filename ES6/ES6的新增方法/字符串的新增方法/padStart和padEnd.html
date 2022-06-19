@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // padStart()和padEnd()：分别在首尾填充字符，补全字符串长度
+        console.log('x'.padStart(5, 'ab'));
+        console.log('x'.padStart(4, 'ab'));
+        console.log('x'.padEnd(5, 'ab'));
+        // 注意事项：
+        // 1.如果原字符串长度>=最大长度，返回原字符串。
+        console.log('xxx'.padStart(3, 'aaa'));
+        // 2.如果省略要填充的字符，默认填充空格
+        console.log('xxx'.padStart(6));
+        // 3.如果补全的字符串+原来的字符串的长度之和大于原来的字符串，则截去超出的补全字符串，原字符串保留
+        // 4.应用：显示时间(两位数)，如，2022-06-19
+        console.log('6'.padStart(2, '0'));
+    </script>
+</body>
+
+</html>

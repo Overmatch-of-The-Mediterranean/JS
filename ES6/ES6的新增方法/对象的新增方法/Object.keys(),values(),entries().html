@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 基本使用
+        const person = {
+            name: 'zhangsan',
+            age: 18,
+            sex: 'male'
+        };
+        console.log(Object.keys(person));
+        console.log(Object.values(person));
+        console.log(Object.entries(person));// 返回二维数组，元素为键+值组成的的一维数组。
+
+        //与数组类似方法的区别
+        // 1.Object.keys(),values(),entries()，都是构造函数的方法，统一返回数组
+        // 2.数组的类似方法是实例方法，统一返回数组的遍历对象(Iterator)
+        // 3.数组的类似方法是ES6新增的方法，而对象的Object.values(),Object.entries()是ES6新增的方法
+        console.log([1, 2].keys());
+        console.log([1, 2].values());
+        console.log([1, 2].entries());
+
+        // 使用for...of循环遍历对象
+        const obj = {
+            name: '嗨嗨嗨',
+            age: 18
+        };
+        for (const value of Object.values(obj)) {
+            console.log(value);
+        }
+        for (const entries of Object.entries(obj)) {
+            console.log(entries);
+        }
+        for (const [key, value] of Object.entries(obj)) {
+            console.log(key, value);
+        }
+        // Object.keys(),values(),entries()并不能保证顺序一定是你看到的样子，和for in是一样的。
+    </script>
+</body>
+
+</html>

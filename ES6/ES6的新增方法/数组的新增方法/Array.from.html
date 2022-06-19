@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Array.from(要转成数组的,作用类似数组的map方法,this指向)将其他数据类型转化为数组
+        console.log(Array.from([1, 2, 3]));
+        // 那些数据类型可以转化为数组：
+        // 1.可遍历的：数组，类数组，字符串，Set,Map
+        console.log(Array.from(new Set([4, 5, 6])));
+        console.log([...[4, 5, 6]]);// 推荐使用
+        // 2.拥有length属性的对象,其中数字和可以转化成数字的字符串作为键，可以将值带到数组中，键作为索引值
+        const obj = {
+            2: 'a',
+            '1': 'b',
+            name: 'hhh',
+            length: 3
+        }
+        console.log(Array.from(obj));
+        // Array.from()的第二个参数的作用类似数组的map方法，对每个元素进行处理，将处理后的值放入返回的数组
+        // console.log([1, 2].map((value) => {
+        //     return value * 2;
+        // }));
+        console.log(Array.from('12', value => value * 2));
+        console.log(Array.from('12').map((value) => value * 2));
+        // 4.第三个参数，指定第二参数的this
+        Array.from('12', function () { console.log(this) }, document);
+    </script>
+</body>
+
+</html>

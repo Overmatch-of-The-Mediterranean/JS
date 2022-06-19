@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 字符串新增方法 includes():检查是否含有某些字符串,检查的是连续在一起的.
+        // 第二个参数代表搜索开始的位置,默认是0
+        const str = 'abc';
+        console.log(str.includes('a'));
+        console.log(str.includes('ab', 1));
+        console.log(str.includes('bc'));
+        console.log(str.includes('ac'));//false
+
+        // 应用:网站网址
+        // 改良后的
+        let url = 'https://www.imooc.com/course/list?';
+        let addURL = (url, name, value) => {
+            if (url.includes('?')) {
+                url += '&'
+                if (url.includes('?&')) {
+                    url = url.replace('?&', '?');
+                }
+                url += `${name}=${value}`;
+            } else {
+                url += '?';
+                url += `${name}=${value}`;
+            }
+            // url += url.includes('?') ? '&' : '?';
+            // url += `${name}=${value}`;
+            return url;
+        }
+        url = addURL(url, 'c', 'fe');
+        console.log(url);
+        url = addURL(url, 'pop', 'sort');
+        console.log(url);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // find(回调函数,回调函数的this指向)：找到满足条件的，立即返回满足条件的第一个值,如果没有返回undefined,结束寻找
+        // findIndex(回调函数,回调函数的this指向)：找到满足条件的，立即返回满足条件的第一个值的索引,如果没有返回-1，结束寻找
+
+        // 1.基本用法
+        console.log([1, 5, 10, 15].find((value, index, arr) => {
+            // console.log(value, index, arr);
+            return value >= 10;
+        }));
+        console.log([1, 5, 10, 15].find((value, index, arr) => {
+            // console.log(value, index, arr);
+            return value >= 20;
+        }));
+        console.log([1, 5, 10, 15].findIndex((value, index, arr) => {
+            // console.log(value, index, arr);
+            return value >= 10;
+        }));
+        console.log([1, 5, 10, 15].findIndex((value, index, arr) => {
+            // console.log(value, index, arr);
+            return value >= 20;
+        }));
+        // 2.第二个参数，this指向
+        [1, 5, 10, 15].findIndex(function (value, index, arr) {
+            // console.log(value, index, arr);
+            console.log(this);
+            return value >= 10;
+        }, document);
+
+        // 应用
+        const students = [
+            {
+                name: 'lihua',
+                age: 1,
+                sex: 'female'
+
+            },
+            {
+                name: 'xiaoqiang',
+                age: 2,
+                sex: 'male'
+
+            },
+            {
+                name: 'xiaohong',
+                age: 3,
+                sex: 'female'
+
+            }
+        ]
+        console.log(students.find(value => value.sex == 'male'));
+    </script>
+</body>
+
+</html>
