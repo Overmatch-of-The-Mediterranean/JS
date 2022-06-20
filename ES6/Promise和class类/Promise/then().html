@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.什么时候执行
+        // pending->fulfilled时,执行then的第一个回调函数
+        // pending->rejected时,执行then的第二个回调函数
+
+        // 2.执行后的返回值
+        // then方法执行后返回一个新的Promise对象，默认返回的永远都是成功状态的Promise对象
+
+        // 3.then方法返回的Promise对象的状态改变
+        const p = new Promise((resolve, reject) => {
+            resolve('succ1');
+        }).then(data => {
+            // 在then的回调函数中,return后面的东西,会用Promise包装一下
+            // return 111;
+            // 等价于
+            console.log(data);
+            return new Promise((resolve, reject) => {
+                reject('error');
+            })
+        }, err => {
+            console.log(err);
+        }).then(data => {
+            console.log(data);
+
+        }, err => {
+            console.log(err);
+        });
+    </script>
+</body>
+
+</html>

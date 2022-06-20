@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 当Promise状态发生改变时，不论如何变化都会执行，不变化不执行，相当于中转站，根据状态传递给不同的部门
+        // new Promise((resolve, reject) => {
+        //     reject('reason');
+        // })
+        //     .finally(data => {
+        //         console.log(data);
+        //     });
+        // 本质
+        // finally()本质相当于then()的特例，其不接收参数，用来处理最近状态，如数据库根据状态打开或闭合
+        // new Promise((resolve, reject) => {
+        //     reject('reason');
+        // })
+        //     .finally(data => {
+        //         console.log(data);
+        //     });
+        // 等同于
+        new Promise((resolve, reject) => {
+            // resolve(123);
+            reject('reason');
+        })
+            .then(result => {
+                return result;
+            },
+                err => {
+                    // return err
+                    // 等价于
+                    return new Promise((resolve, reject) => {
+                        reject(err);
+                    });
+                })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    </script>
+</body>
+
+</html>

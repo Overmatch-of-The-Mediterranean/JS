@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            transition: all 0.5s ease 0s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        // Promise是异步执行的一种解决方案，一般用于解决回调函数层层嵌套的问题(回调地狱)
+        const move = (el, { x = 0, y = 0 }, end = () => { }) => {
+            el.style.transform = `translate3d(${x}px,${y}px,0)`;
+            el.addEventListener('transitionend', () => {
+                end();
+            }, false)
+        };
+        const movePromise = (el, point) => {
+            return new Promise(resolve => {
+                move(el, point, () => {
+                    resolve();
+                });
+            })
+        }
+        let boxEl = document.getElementById('box');
+        // document.addEventListener('click', () => {
+        //     move(boxEl, { x: 150 }, () => {
+        //         move(boxEl, { x: 150, y: 150 }, () => {
+        //             move(boxEl, { y: 150 }, () => {
+        //                 move(boxEl, { x: 0, y: 0 });
+        //             })
+        //         })
+        //     })
+        // }, false);
+        // 解决回调地狱
+        document.addEventListener('click', () => {
+            movePromise(boxEl, { x: 150 })
+                .then(() => {
+                    return movePromise(boxEl, { x: 150, y: 150 });
+                })
+                .then(() => {
+                    return movePromise(boxEl, { y: 150 });
+                })
+                .then(() => {
+                    return movePromise(boxEl, { x: 0, y: 0 });
+                })
+        }, false)
+        // Promise的基本用法
+        // 1.实例化构造函数生成实例对象
+        // let p = new Promise(() => { })
+
+        // 2.Promise的状态：pending(等待)，fulfilled(成功)，rejected(失败)
+        // Promise的状态一旦变化，就不会再改变，状态改变只能是这样：pending->fulfilled，pending->rejected
+        // 3.resolve与reject函数的参数，会传入到then的回调函数中的参数。
+        const p = new Promise((resolve, reject) => {
+            // resolve('111');
+            reject('222');
+        }).then(data => {
+            console.log(data);
+        }, data2 => {
+            console.log(data2);
+        });
+    </script>
+</body>
+
+</html>

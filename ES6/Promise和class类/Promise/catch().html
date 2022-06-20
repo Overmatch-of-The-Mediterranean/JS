@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // catch()只能用来处理失败状态的Promise，本质上是then的特例
+        // 基本用法
+        // 一般建议，Promise对象后面要跟catch方法，这样可以处理Promise内部发生的错误
+        // 错误不会消失，直至被捕获，如果不被捕获则会报错
+        new Promise((resolve, reject) => {
+            reject('reason');
+        })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.log(err);
+                return 'succ'
+            })
+            .then(data => {
+                console.log(data);
+                throw new Error('reason1')
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+        // .catch(err => {
+        //     console.log(err);
+        // })
+        // 相当于
+        // .then(null, err => {
+        // console.log(err);
+        //      })
+    </script>
+</body>
+
+</html>
