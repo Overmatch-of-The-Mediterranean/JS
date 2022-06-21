@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.resolve或reject函数执行后的代码
+        // 推荐在调用resolve或reject函数的时候加上return，不再执行其后面的代码
+        new Promise((resolve, reject) => {
+            return resolve('reason');
+            // console.log('hi');
+        })
+        // 2.Promise.all/race/allSettled的参数问题
+        // 任何可遍历的都可以作为参数，包括非原生添加迭代器也是可以的
+        // 参数如果是Promise数组，会将不是Promise的数组元素转变成Promise对象
+        // Promise.all([1, 2, 3]).then(data => {
+        //     console.log(data);
+        // })
+        // 相当于
+        Promise.all([
+            Promise.resolve(1),
+            Promise.resolve(2),
+            Promise.resolve(3)
+        ]).then(data => {
+            console.log(data);
+        })
+        // 3.Promise.all/race/allSettled的错误处理
+        const delay = ms => {
+            return new Promise(resolve => {
+                setTimeout(resolve, 1000);
+            })
+        }
+        const p1 = delay(1000).then(() => {
+            console.log('p1完成了');
+            return Promise.reject('p2');
+        })
+        // .catch(err => {
+        //     console.log(err);    自己处理自己的错误
+        // });
+        const p2 = delay(2000).then(() => {
+            console.log('p2完成了');
+            return Promise.reject('p2');
+        })
+        // .catch(err => {
+        //     console.log(err);    自己处理自己的错误
+        // });
+        const allPromise = Promise.all([p1, p2]);
+        allPromise.then(data => {
+            console.log(data);
+        }).catch(err => {
+            console.log(err);  // 统一处理
+        })
+        // 错误既可以单独处理,又可以统一处理
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.Promise.race()
+        const delay = ms => {
+            return new Promise(resolve => {
+                setTimeout(resolve, 1000);
+            })
+        }
+        const p1 = delay(1000).then(() => {
+            console.log('p1完成了');
+            return Promise.reject('p2');
+        });
+        const p2 = delay(2000).then(() => {
+            console.log('p2完成了');
+            return Promise.reject('p2');
+        })
+        // Promise.race()的状态取决于第一个完成的Promise实例对象
+        const race = Promise.race([p1, p2]);
+        race.then(data => {
+            console.log(data);
+        }, err => {
+            console.log(err);
+        });
+        // 2.Promise.allSettled()
+        // 2.Promise.allSettled()的状态与传入的Promise状态无关，其永远都是成功的
+        const allSettled = Promise.allSettled([p1, p2]);
+        allSettled.then(data => {
+            console.log(data, 'succ');
+        });
+    </script>
+</body>
+
+</html>

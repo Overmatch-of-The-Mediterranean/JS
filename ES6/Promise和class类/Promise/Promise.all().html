@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Promise.all()关注多个Promise对象的状态变化
+        // 传入多个Promise实例，包装成一个新的Promise实例返回
+        const delay = ms => {
+            return new Promise(resolve => {
+                setTimeout(resolve, 1000);
+            })
+        }
+        const p1 = delay(1000).then(() => {
+            console.log('p1完成了');
+            return 'p1';
+        });
+        const p2 = delay(2000).then(() => {
+            console.log('p2完成了');
+            return Promise.reject('p2');
+        })
+        // Promise.all()的状态变化与所有传入的Promise实例对象状态有关
+        // 所有实例对象状态都为resolved时，最终状态才为resolved
+        // 只要有一个实例对象为rejected，最终状态就变为rejected
+        // 相当于&&运算
+        const p = Promise.all([p1, p2]);
+        p.then(data => {
+            console.log(data);
+        }, err => {
+            console.log(err);
+        });
+    </script>
+</body>
+
+</html>

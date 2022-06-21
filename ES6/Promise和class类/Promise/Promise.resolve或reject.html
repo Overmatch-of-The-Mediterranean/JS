@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Promise.resolve()就是成功形式的简写形式
+        // new Promise((resolve,reject)=>{
+        // resolve();
+        // })
+
+        // 参数
+        // 1.一般参数
+        Promise.resolve('succ').then(data => {
+            console.log(data);
+        })
+        // 2.Promise对象
+        // 当Promise.resolve()接收的是Promise对象时，直接返回这个Promise对象，什么都不做
+        // 当resolve()函数接收的是promise对象时，后面的then会根据传递的Promise对象的状态变化决定执行那一个回调函数
+        const p1 = new Promise(resolve => {
+            setTimeout(resolve, 1000, '我执行了');
+            // 相当于
+            // setTimeout(() => {
+            //     resolve('我执行了');
+            // }, 1000);
+        })
+        Promise.resolve(p1).then(data => {
+            console.log(data);
+        })
+        // 等价于
+        // p1.then(data => {
+        //     console.log(data);
+        // })
+        console.log(Promise.resolve(p1) === p1);
+        // 3.具有then方法的对象，建议看视频
+        const thenable = {
+            then(resolve, reject) {
+                console.log('then');
+                resolve('succ1');
+                // reject('reason');
+            }
+        };
+        Promise.resolve(thenable).then(data => {
+            console.log(data);
+        }, err => {
+            console.log(err);
+        });
+        console.log(Promise.resolve(thenable));
+
+        // Promise.reject()就是失败形式的简写形式
+        // new Promise((resolve,reject)=>{
+        // reject();
+        // });
+        // 参数
+        // 不管什么参数，都会原封不动的向后传递，作为后续方法的参数
+        Promise.reject(p1).catch(err => {
+            console.log(err);
+        });
+    </script>
+</body>
+
+</html>
