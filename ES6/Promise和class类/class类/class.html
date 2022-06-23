@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // class的基本用法
+        // 所有的class都要有构造方法
+        // 一般属性在constructor中定义，方法在constructor中定义会大量消耗内存，方法的定义与constructor平级
+        class Person {
+            constructor(name, age) {
+                console.log('嗨嗨嗨');
+                this.name = name;
+                this.age = age;
+            }
+            // 在此定义，实例共享该方法
+            speak() {
+                console.log('我是speak');
+            }
+        }
+        const p = new Person('zs', '18');//实例化时，构造方法执行。
+        console.log(p.name);
+        p.speak()
+        console.log(typeof Person);//其底层还是构造函数那一套
+        // console.log(p.speak());
+
+        // Class与构造函数
+        function Person1(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        // 构造函数的共享方法写在原型对象上
+        Person1.prototype.speak1 = function () {
+            console.log('hhh');
+        }
+
+        // class的两种定义形式
+        // 1.声明形式(最常用)
+        // class Person {
+        //     constructor(name, age) {
+        //         console.log('嗨嗨嗨');
+        //         this.name = name;
+        //         this.age = age;
+        //     }
+        //     // 在此定义，实例共享该方法
+        //     speak() {
+        //         console.log('我是speak');
+        //     }
+        // }
+        // 2.表达式形式
+        const Person2 = class {
+            constructor() {
+                console.log('表达式');
+            }
+            speak() { };
+        }
+        new Person2()
+        // 立即执行类
+        new (class {
+            constructor() {
+                console.log('匿名');
+            }
+        })();
+    </script>
+</body>
+
+</html>

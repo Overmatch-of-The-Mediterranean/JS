@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 公有的属性和方法可以被外界修改,造成意想不到的错误
+        // 私有属性和方法:就是属性和方法不能被外界修改
+        // 模拟私有属性和方法
+        // 1._开头表示私有(约束性不强)
+        // class Person {
+        //     constructor(name, age) {
+        //         console.log('嗨嗨嗨');
+        //         this._name = name;
+        //         this._age = age;
+        //     }
+        //     _speak() {
+        //         console.log('我是speak');
+        //     }
+        // }
+
+
+        // 2.将私有属性和方法移出类,就是相当于将属性和方法封装在一个局部区域内(约束性强).
+        (function () {
+            let name = '';
+            let age = ''
+            class Person {
+                constructor(username, userage) {
+                    username = name;
+                    userage = age;
+                }
+                speak() {
+                    console.log('我是speak');
+                }
+            }
+            window.Person = Person;// 这样就可以在全局作用域中找到它,但name与age的定义不在class中,name与age不暴露在全局作用域中
+        })();
+        (function () {
+            const p = new Person('yyy', 18);
+            console.log(p.name);
+        }
+        )()
+    </script>
+</body>
+
+</html>

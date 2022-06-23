@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.子类继承父类,父类的所有东西全部继承
+        class Person {
+            constructor(name, age) {
+                console.log('嗨嗨嗨');
+                this.name = name;
+                this.age = age;
+                this.speak = function () {
+                    console.log('我是speak');
+                }
+            }
+            say() {
+                console.log('say');
+            }
+        }
+        // class Student extends Person {
+        //     constructor(name, age) {
+        //         super(name, age);//这里的super指的是Person中的构造方法
+        //     }
+        // }
+        // const zs = new Student('zs', 18);
+        // console.log(zs.name);
+        // zs.speak();
+
+        // 2.改写继承的属性或方法
+        class Student extends Person {
+            constructor(name, age, feature) {
+                super(name, age);//这里的super指的是Person中的构造方法
+                this.feature = feature// 子类中新添加的属性要放在super后面,即,this操作不能放在super前面,否则会报错
+            }
+            // 与父类中的同名覆盖
+            say() {
+                console.log('say1');
+            }
+        }
+        const zs = new Student('zs', 18, '地中海');
+        console.log(zs.name);
+        console.log(zs.feature);
+        zs.say();
+
+    </script>
+</body>
+
+</html>

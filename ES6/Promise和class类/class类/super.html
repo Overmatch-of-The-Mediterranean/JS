@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.super作为函数调用
+        // 其代表父类的构造方法,只能用在子类的构造方法中,用在其他地方会报错
+        // super虽然代表了父类的构造方法,但是内部的this指向子类的实例
+        // 定义在父类实例上的方法和属性,是无法通过super调用的
+        // class Person {
+        //     constructor(name, age) {
+        //         console.log('嗨嗨嗨');
+        //         this.name = name;
+        //     }
+        //     say() {
+        //         console.log('say');
+        //     }
+        // }
+        // class Student extends Person {
+        //     constructor(name, age) {
+        //         super(name, age);//这里的super指的是Person中的构造方法
+        //     }
+        // }
+
+        // 2.作为对象使用
+        // 2.1在构造方法或一般方法中使用
+        // super代表父类的原型对象 Person.prototype
+        // 定义在父类实例上的方法或属性,是无法通过super调用的
+        // 通过super调用父类的方法时,方法内部的this指向子类的实例
+        class Person {
+            constructor(name, age) {
+                console.log('嗨嗨嗨');
+                this.name = name;// 其定义在实例上,不在原型上
+            }
+            say() {
+                console.log('say对象');//这里的say相当于添加到Person.prototype,因为是共享
+            }
+            static speak() {
+                console.log('静态');
+            }
+        }
+        class Student extends Person {
+            constructor(name, age) {
+                super(name, age);//这里的super指的是Person中的构造方法
+                super.say();
+                console.log(this);
+                console.log(super.name); //其定义在实例上, 不在原型上
+
+                // 2.2在静态方法中使用
+                // 此时this指向父类,不指向原型对象
+            }
+            static speak() {
+                super.speak();
+                console.log(this);
+                console.log('子类');
+            }
+        }
+        const p = new Student();
+        Student.speak();
+
+        // super注意事项
+        // 使用super的时候,必须显式指定是作为函数还是作为对象,否则会报错
+        class Person1 {
+            constructor(name, age) {
+                console.log('嗨嗨嗨');
+                this.name = name;
+            }
+            say() {
+                console.log('say对象');
+            }
+        }
+        class Student1 extends Person1 {
+            constructor(name, age) {
+                super(name, age);
+                // console.log(super);这里会报错
+                // console.log(super(name, age));
+                // console.log(super.say);
+            }
+        };
+        new Student1();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.实例属性
+        class Person {
+            name = 'hhh';//在这里定义属性,相当于给属性默认值
+            age = 0;
+            // 实例方法
+            getSex = function () {
+                return this.sex;
+            }
+            constructor(name, age) {
+                console.log('嗨嗨嗨');
+                this.name = name;
+                this.age = age;
+            }
+            speak() {  //这个是实例的方法
+                console.log('我是speak');
+                // 这里的this指的是实例对象
+            }
+            // 2.静态方法就是类的方法,用static定义,静态方法与实例方法可以重名
+            static speak() {
+                console.log('静态');
+                // 这里的this指的是类本身
+            }
+        }
+        // 静态方法也可以这样添加
+        // Person.speak = function () { };
+
+        // 3.静态属性
+        class Person {
+            constructor(name, age) {
+                console.log('嗨嗨嗨');
+                this.name = name;
+                this.age = age;
+            }
+            // static 属性 = 值,这种定义方式,目前只是提案,兼容性不好
+            // 下面这种形式,相当于变相定义静态属性
+            static getSex() {
+                return 'male'
+            }
+        }
+    </script>
+</body>
+
+</html>
