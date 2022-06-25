@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Module系统需要在服务器环境才能正常执行
+        // 模块是一个一个局部作用域的代码块
+        // 模块系统主要解决的问题
+        // 1.模块化的问题
+        // 2.消除全局变量
+        // 3.管理加载顺序，如果各个模块间的引用有联系，那么只需要引用少量的JS文件，因为JS内部有联系
+        // ES module可以理解为 seaJS,requireJS的原生版本
+
+
+        // Module的基本用法
+        // 只要模块化(出现 import,export)，都需要在script中添加 type="module"
+
+        // 导入和导出
+        // 一个模块没有导出，也可以导入，相当于只执行一次导入模块的代码
+
+        // export default对应的import
+        // export default在一个模块文件中只能出现一次，否则会报错，另外对象和函数也可以导。
+        const age = 18;
+        export default age; // 第一个文件导出
+        export default function () { };
+        import 名字(可以改名) from '文件名'  // 第二个文件导入
+
+        // export对应的import
+        // 1.基本用法
+        // 不可以随便取名字,名字需保持一致
+        // export age / 18  ×
+        导出的形式 export 声明或语句
+        export const age = 18;
+        export { age };
+        导入的形式 import { } from '文件名'
+        import { age } from '文件名'
+
+        // 2.导出多个
+        export const age;
+        export function fn() { };
+        export { age, fn };
+        import { age, fn } from '文件名'
+
+        // 3.导入导出时起别名,起过别名后，原名失效
+        export const age;
+        export function fn() { };
+        export { age as age2, fn as fun };
+        import { age2, fun };
+        // 也可以
+        export { age fn };
+        import { age as age2, fn as fun };
+
+        // 4.整体导入，导入所有导出
+        import * as obj from '文件名'
+
+        // 5.同时导入
+        export default age
+        export function fn() { };
+        export class cla() { };
+        import age, { fn, cla } from '文件名'  // export default要放在前面，否则会报错
+
+
+        //Module注意事项
+        // 1.模块顶层的this指向
+        // 模块中，顶层的this指向undefined,顶层是指在模块中的最外层。可以用来判断是否模块化成功
+        if (typeof this !== 'undefined') {
+            throw new Error('请模块化');
+        }
+
+        // 2.import关键字与import()函数
+        // import具有提升效果，提升到整个模块的头部，率先执行import中的模块的代码，然后再执行后面的语句
+        if (PC) {
+            import 'PC.js';  // import,export不能放在复合语句中，import,export不可以按条件导入,导出
+        } else if (Mobile) {
+            import 'Mobile.js';
+        } // 这个会报错
+
+        // import()函数可以按条件导入，返回Promise对象，目前该函数只是提案，不是标准，兼容性差，后面会与一种技术一起使用，解决兼容性问题。
+        if (PC) {
+            import('PC.js').then().catch();
+        } else if (Mobile) {
+            import('Mobile.js').then().catch();
+        }
+        // 3.导入导出的复合写法,复合写法导入的在当前模块中不可以访问，不可以使用。
+        export { age } from 'module.js';
+        console.log(age); // ×
+        // 等价于
+        // import { age } from 'module.js';
+        // export { age } from 'module.js';
+        // console.log(age); // 可以访问到
+    </script>
+</body>
+
+</html>
