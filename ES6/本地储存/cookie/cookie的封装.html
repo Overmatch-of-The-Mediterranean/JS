@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="cn">中文</button>
+    <button id="en">英文</button>
+    <script type="module">
+        import { set, get, remove } from './cookie的封装.js'
+        set('username', 'zs');
+        set('age', 18);
+        set('用户名', '李四');
+        set('sex', 'male', {
+            maxage: 60 * 60
+        });
+
+        remove('sex');
+        console.log(get('sex'));
+        console.log(get('用户名'));
+
+
+        let cnbtn = document.getElementById('cn');
+        let enbtn = document.getElementById('en');
+        cnbtn.addEventListener('click', () => {
+            set('language', 'cn', {
+                maxage: 60 * 60
+            })
+            window.location = './cookie的封装.html'
+        }, false)
+        enbtn.addEventListener('click', () => {
+            set('language', 'en', {
+                maxage: 60 * 60
+            })
+            window.location = './cookie的封装.html'
+        }, false)
+    </script>
+</body>
+
+</html>

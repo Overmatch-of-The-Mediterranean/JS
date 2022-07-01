@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="https://www.imooc.com" id="login" method="post">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="submit" id="btn">
+    </form>
+
+
+    <script>
+        // // 1.localStorage是什么
+        // // localStorage也是一种浏览器存储数据的方式，它只是存储在本地，不会发送到服务器端
+        // // 单个域名下的localStorage总大小有限制，不同浏览器限制不同
+        // // localStorage只有两个属性 键和值
+
+        // // 2.localStorage在浏览器中的操作
+
+        // // 3.localStorage的基本用法以及其属性和方法
+        // // setItem()
+        // localStorage.setItem('name', 'zs');
+        // localStorage.setItem('age', 18);
+
+        // // length
+        // console.log(localStorage.length);
+
+        // // getItem()
+        // console.log(localStorage.getItem('name'));
+        // // 获取不存在的返回null
+        // console.log(localStorage.getItem('sex'));
+
+        // //removeItem()，一个一个清除
+        // localStorage.removeItem('age');
+        // console.log(localStorage);
+        // // 删除不存在的key也不会报错，没有反应
+
+        // // clear(),全部清除
+        // localStorage.clear();
+        // console.log(localStorage);
+
+        // 4.使用localStorage实现自动填充
+        let form = document.getElementById('login');
+        let btn = document.getElementById('btn');
+
+        let username = localStorage.getItem('username');
+        if (username) {
+            form.username.value = username;
+        }
+
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            // 数据验证
+
+            // form.username获取name为username的元素
+            localStorage.setItem('username', form.username.value);
+            form.submit();
+        }, false);
+    </script>
+</body>
+
+</html>
