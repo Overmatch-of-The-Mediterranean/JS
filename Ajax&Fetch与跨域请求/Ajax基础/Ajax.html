@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.Ajax是什么
+        // Ajax是Asynchronous(异步) Javascript and XML的简写
+        // Ajax中的异步：可以异步的向服务器发送请求，在等待响应的过程中，不会阻塞当前页面，浏览器可以做其他事情，
+        // 直到成功获取响应后，浏览器才开始处理响应数据
+        // XML(可拓展标记语言)是前后端通信时传输数据的一种格式，目前已过时，现在常用JSON
+        // Ajax其实就是浏览器与服务器之间的一种异步通信方式,使用Ajax可以在不加载整个页面的情况下,对页面的某部分进行更新
+
+        // 2.搭建Ajax开发环境
+        // Ajax需要服务器环境,非服务器环境下,很多浏览器无法正常使用Ajax
+        // 搭建服务器环境的方法
+        // 1.VScode的live Server插件
+        // 2.windows下的phpstudy
+        // 3.Mac下的MAMP
+
+
+        // Ajax的基本用法
+        // 1.XMLHttpRequest
+        // Ajax想要实现前后端之间的异步通信，需要依靠XMLHttpRequest，它是一个构造函数
+        // 不论是XMLHttpRequest，还是Ajax，都没有和具体的某种数据格式绑定
+
+        // 2.Ajax的使用步骤
+        // 2.1创建xhr对象
+        // const xhr = new XMLHttpRequest();
+
+        // 2.4监听事件，处理响应(为照顾兼容性，可写在第二部分)
+        // 当获取到响应后，会触发xhr对象的readystatechange事件，可以在该事件中对响应进行处理
+        // 为了兼容性,readystatechange中不使用this,而是直接使用xhr
+        // xhr.onreadystatechange = () => {    // (兼容性好)
+        //     if (xhr.readyState !== 4) {
+        //         return;
+        //     }
+        // xhr.addEventListener('readystatechange', () => { }, false);
+
+        // HTTP CODE
+        // 获取响应后,响应的内容会自动填充到xhr对象的responseText属性中,该属性以字符串形式存储内容
+        // xhr.statusText:状态说明码,OK,Not Found
+        // if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        //     console.log(xhr.responseText);
+        // }
+        // }
+        // readystatechange事件监听readystate这个状态的变化
+        // 它的值从0~4，一共五个状态
+        // 0：未初始化，未调用open()
+        // 1：启动，调用open()，未调用send()
+        // 2：发送，调用send()，未接收到响应
+        // 3：接收，接收到部分响应，未全部接收
+        // 4：完成，接收到所有的响应，而且已经可以在浏览器中使用了
+
+        // 2.2准备发送请求，使用open(http方法(GET,POST,PUT,DELETE)，地址URL(向那发送请求)，是否使用异步方式发送请求)，总共三个参数
+        // xhr.open()
+
+        // 2.3发送请求，send()方法
+        // send()的参数是通过请求体携带数据的，使用get，send()里面可不写，也可写成send(null)(为照顾兼容性)
+        // xhr.send()
+
+        // 使用Ajax完成前后端通信
+        const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== 4) {
+                return;
+            }
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+                console.log(xhr.responseText);
+                console.log(typeof xhr.responseText);
+            }
+        }
+        xhr.open('GET', url, true);
+        xhr.send(null);
+    </script>
+</body>
+
+</html>

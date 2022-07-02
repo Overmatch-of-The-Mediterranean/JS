@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.携带数据
+        // 既可以通过请求体，也可以通过请求头
+        const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== 4) {
+                return;
+            }
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+                console.log(xhr.responseText);
+                console.log(typeof xhr.responseText);
+            }
+        }
+        xhr.open('POST', url, true);
+        // 发送数据，直接卸载send()的参数位置，一般是字符串
+        // 传入参数要规定格式：
+        // 1.'username=hhh&age=18'
+        // 2.JSON形式
+        xhr.send('hhh');
+
+         // 2.数据编码
+        // 对于非英文字母，使用encodeURIComponent
+        // 有的浏览器会自动帮你编码，但是不同浏览器编码形式不同，而服务器的解码形式是不变的，所以需要自己主动来编码，保持前后端形式一致
+    </script>
+</body>
+
+</html>

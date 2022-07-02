@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module">
+        // 1.JSON.parse()
+        // JSON.parse()可以将JSON格式的字符串解析成JS中的对应数据类型
+        // 一定要是合法的JSON字符串,否则会报错
+        // const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        // const xhr = new XMLHttpRequest();
+        // xhr.onreadystatechange = () => {
+        //     if (xhr.readyState !== 4) {
+        //         return;
+        //     }
+        //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        //         console.log(xhr.responseText);
+        //         console.log(typeof xhr.responseText);
+        //         console.log(JSON.parse(xhr.responseText));
+        //         //console.log(JSON.parse(xhr.responseText).data);
+        //     }
+        // }
+        // // xhr.open('GET', url, true);
+        // xhr.open('GET', './obj.json', true);
+        // xhr.send(null);
+
+        // 2.JSON.stringify()
+        // JSON.stringify()可以将JS的基本数据类型,对象或数组转换成JSON格式的字符串
+        // const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        // const xhr = new XMLHttpRequest();
+        // xhr.onreadystatechange = () => {
+        //     if (xhr.readyState !== 4) {
+        //         return;
+        //     }
+        //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        //         console.log(xhr.responseText);
+        //         console.log(typeof xhr.responseText);
+        //         console.log(JSON.parse(xhr.responseText));
+        //         //console.log(JSON.parse(xhr.responseText).data);
+        //     }
+        // }
+        // // xhr.open('GET', url, true);
+        // xhr.open('POST', url, true);
+        // xhr.send(JSON.stringify({
+        //     username: 'alex',
+        //     age: 18
+        // }));
+
+        // 3.使用JSON.parse()和JSON.stringify()封装localStorage
+        import { set, get, remove, clear } from './Storage.js';
+        set('username', 'TOM');
+        console.log(get('username'));
+        set('zs', {
+            age: 18,
+            sex: 'male'
+        })
+        console.log(get('zs'));
+        remove('username');
+        clear();
+    </script>
+</body>
+
+</html>

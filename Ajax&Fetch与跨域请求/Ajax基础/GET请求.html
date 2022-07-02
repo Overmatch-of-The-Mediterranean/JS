@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 使用Form想发送数据，里面一定要有name属性 -->
+    <form action="http://www.imooc.com/api/http/search/suggest?words=js" method="get">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="submit" value="提交">
+    </form>
+    <script>
+        // 1.携带数据
+        // GET请求不能通过请求体携带数据,可以通过请求头携带
+
+        const url = `http://www.imooc.com/api/http/search/suggest?words=${encodeURIComponent('奥里给')}`;
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== 4) {
+                return;
+            }
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+                console.log(xhr.responseText);
+                console.log(typeof xhr.responseText);
+            }
+        }
+        xhr.open('GET', url, true);
+        xhr.send(null);
+        // 不会报错,也不会发送该数据
+        xhr.send('sex=male');
+
+        // 这里使用Ajax和使用Form表单发送数据很像
+
+        // 2.数据编码
+        // 对于非英文字母，使用encodeURIComponent
+        // 有的浏览器会自动帮你编码，但是不同浏览器编码形式不同，而服务器的解码形式是不变的，所以需要自己主动来编码，保持前后端形式一致
+    </script>
+</body>
+
+</html>
