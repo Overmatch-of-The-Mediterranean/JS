@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.load事件
+        // IE9开始支持，addEventListener也是IE9开始支持，这两者可以配合使用
+        // 响应数据可用时触发，可替代readystatechange事件
+        // const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        // const xhr = new XMLHttpRequest();
+        // xhr.addEventListener('load', () => {
+        //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        //         console.log(xhr.responseText);
+        //     }
+        // }, false);
+        // xhr.open('GET', url, true);
+        // xhr.send(null);
+
+        // 2.error事件
+        // IE10开始支持
+        // 请求发生错误时触发
+        // const url = 'http://www.iimooc.com/api/http/search/suggest?words=js';
+        // const xhr = new XMLHttpRequest();
+        // xhr.addEventListener('load', () => {
+        //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        //         console.log(xhr.responseText);
+        //     }
+        // }, false);
+        // xhr.addEventListener('error', () => {
+        //     console.log('错误error');
+        // }, false);
+        // xhr.open('GET', url, true);
+        // xhr.send(null);
+
+        // 3.abort事件
+        // IE10开始支持
+        // 调用abort()时触发
+        // const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        // const xhr = new XMLHttpRequest();
+        // xhr.addEventListener('load', () => {
+        //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        //         console.log(xhr.responseText);
+        //     }
+        // }, false);
+        // xhr.addEventListener('abort', () => {
+        //     console.log('事件终止');
+        // }, false);
+        // xhr.open('GET', url, true);
+        // xhr.send(null);
+        // xhr.abort();
+
+        // 4.timeout事件
+        // IE8开始支持
+        // 请求超时触发
+        const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('timeout', () => {
+            console.log('请求超时');
+        }, false);
+        xhr.open('GET', url, true);
+        xhr.timeout = 10;
+        xhr.send(null);
+    </script>
+</body>
+
+</html>

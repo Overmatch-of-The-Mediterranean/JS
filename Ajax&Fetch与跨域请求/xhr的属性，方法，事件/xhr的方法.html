@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 表单默认是enctype="application/x-www-form-urlencoded"格式 -->
+    <!-- <form action="http://www.imooc.com/api/http/search/suggest?words=js" method="post">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="submit" value="提交">
+    </form> -->
+    <script>
+        // 1.abort()
+        // 终止当前请求的，一般配合abort事件使用
+        // const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        // const xhr = new XMLHttpRequest();
+        // xhr.onreadystatechange = () => {
+        //     if (xhr.readyState !== 4) {
+        //         return;
+        //     }
+        //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        //         console.log(xhr.responseText);
+        //     }
+        // }
+        // xhr.open('GET', url, true);
+        // xhr.send(null);
+        //xhr.abort();
+
+        // 2.setRequestHeader()
+        // 设置请求头信息，但一般考虑安全性，浏览器会不让设置
+        // 可以设置请求头中的Content-Type,其一般设置这两个值application/x-www-form-urlencoded，application/json
+        // 请求头中的Content-Type字段用来告诉服务器，浏览器发送的数据是什么格式的
+        // 'application/x-www-form-urlencoded'格式，对应'username=alex&age=18'
+        // 'application/json'格式，对应json格式的字符串
+        // setRequestHeader(头部字段的名称，头部字段的值)
+        //const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        const url = 'http://www.imooc.com/api/http/json/search/suggest?words=js';// 发'application/json'格式数据时，后端设置的接口
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== 4) {
+                return;
+            }
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+                console.log(xhr.responseText);
+            }
+        }
+        // 使用GET请求时，没有必要设置Content-Type，使用POST请求时，才设置Content-Type
+        xhr.open('POST', url, true);
+        // 没加'Content-Type':'application/x-www-form-urlencoded'时，是负载，加了就伪装成了Form data
+        //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // 发'application/json'格式数据时，需要后端处理一下接口，否则报错
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            username: 'alex'
+        }));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.responseType和response属性
+        // response可以替代responseText,response兼容性IE6~9不支持，IE10开始支持
+        // responseType默认是文本形式，当responseType参数为''或'text'时，可以用responseText
+        // const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        // const xhr = new XMLHttpRequest();
+        // xhr.onreadystatechange = () => {
+        //     if (xhr.readyState !== 4) {
+        //         return;
+        //     }
+        //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        //         // 使用xhr.responseType = 'json'，即，json格式数据时，xhr.response返回的是已经由json格式转化为JS格式的结果
+        //         // 可以认为设置成xhr.responseType = 'json'浏览器会自动帮我们调用JSON.parse()转换
+        //         // xhr.responseType=''，xhr.responseType = 'text'时，xhr.response返回字符串形式
+        //         // 
+        //         console.log(xhr.response);
+        //     }
+        // }
+        // xhr.open('GET', url, true);
+        // // xhr.responseType='';
+        // // xhr.responseType = 'text';
+        // xhr.responseType = 'json';    //此时使用xhr.responseText报错
+        // xhr.send(null);
+
+        // 2.timeout属性
+        // 设置请求的超时时间
+        // timeout属性IE8开始支持
+        // const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        // const xhr = new XMLHttpRequest();
+        // xhr.onreadystatechange = () => {
+        //     if (xhr.readyState !== 4) {
+        //         return;
+        //     }
+        //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+        //         console.log(xhr.response);
+        //     }
+        // }
+        // xhr.open('GET', url, true);
+        // //xhr.timeout = 10;
+        // xhr.send(null);
+        // //xhr.timeout = 10;
+
+        // 3.withCredentials属性
+        // IE10开始支持
+        // 指定使用Ajax发送请求时是否携带cookie
+        // withCredentials默认，使用Ajax发送请求时，同域名，会携带cookie，跨域时，不会携带
+        // xhr.withCredentials = true;最后能否跨域成功，要看服务器同不同意，即看Access-Control-Allow-Origin
+        const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        //const url = './xhr的属性.html';
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== 4) {
+                return;
+            }
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+                console.log(xhr.responseText);
+                console.log(typeof xhr.responseText);
+            }
+        }
+        xhr.open('GET', url, true);
+        xhr.withCredentials = true; //想跨域携带cookie，Access-Control-Allow-Origin不能是*，要是跨域的域名
+        xhr.send(null);
+    </script>
+</body>
+
+</html>
