@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="login" action="http://www.imooc.com/api/http/search/suggest?words=js" method="post">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="submit" value="提交" id="submit">
+    </form>
+    <script>
+        // 1.使用Ajax结合Formdata提交表单
+        const login = document.getElementById('login');
+        const btn = document.getElementById('submit');
+        const { username, password } = login;
+        const url = 'http://www.imooc.com/api/http/search/suggest?words=js';
+        btn.addEventListener('click', e => {
+            // 阻止表单自动提交
+            e.preventDefault();
+
+            // 表单数据验证
+
+            // 发送Ajax请求
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', () => {
+                if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+                    console.log(xhr.response);
+                }
+            }, false)
+            xhr.open('POST', url, true);
+            // 组装数据
+            //const data = `username=${username.value}&password=${password.value}`;
+            // 2.FormData的基本使用
+            // IE10开始支持
+            // 2.1通过HTML的表单元素创建FormData对象，FormData可用于发送表单数据
+            // const data = new FormData(表单元素);
+            // xhr.send(data)
+            // 通过append()方法添加数据
+            // data.append(名，值); 可在表单元素的基础上添加数据，如果没有表单元素也可以直接添加
+            const data = new FormData(login);
+            data.append('age', 18);
+            data.append('sex', 'male');
+            //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // 使用FormData浏览器会自动添加Content-Type：multipart/form-data; boundary=----WebKitFormBoundary37sDo6snbjifGlWj
+            xhr.send(data);
+        }, false)
+    </script>
+</body>
+
+</html>
