@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<input type="text" id="search">
+<ul id="result"></ul>
+
+<body>
+    <script type="module">
+        import { getJSON } from '../Ajax进阶/Ajax封装/instancePromise.js';
+        const url = 'https://www.imooc.com/api/http/search/suggest?words=';
+        const searchInput = document.getElementById('search');
+        const result = document.getElementById('result');
+        const handleInputEvent = function () {
+            if (searchInput.value.trim() !== '') {
+                getJSON(`${url}${searchInput.value}`)
+                    .then(response => {
+                        console.log(response);
+                        let html = '';
+                        for (const item of response.data) {
+                            html += `<li>${item.word}</li>`;
+                        }
+                        result.innerHTML = html;
+                        result.style.display = '';
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            } else {
+                result.innerHTML = '';// 用来清除li
+                result.style.display = 'none';
+            }
+            console.log(result);
+        }
+        let timer = null;
+        searchInput.addEventListener('input', () => {
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(handleInputEvent, 500);
+        }, false);
+
+    </script>
+</body>
+
+</html>

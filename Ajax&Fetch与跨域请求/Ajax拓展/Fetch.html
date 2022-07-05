@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.Fetch也是前后端通信的方式
+        // Fetch是Ajax的一种替代方案，它是基于Promise的
+        // Fetch不成熟，Ajax成熟
+        // 例如，Ajax的兼容性比Fetch好，Fetch没有abort(),timeout()等方法，需要自己编写
+
+        // 2.Fetch的基本用法
+        // Fetch是一个函数，调用后返回Promise对象
+        const url = 'https://www.imooc.com/api/http/json/search/suggest?words=js';
+
+        // body: (...)              // body里面就是数据，body只能读一次，读完后会锁上
+        // bodyUsed: false          //body读完一次，变成true
+        // headers: Headers { }
+        // ok: true                 //ok为true表示可以读取数据，不用再去判断HTPP状态码
+        // redirected: false        // 跟重定向有关
+        // status: 200              
+        // statusText: "OK"
+        // type: "cors"
+        // url: "https://www.imooc.com/api/http/search/suggest?words=js"
+
+        // fetch的第二个参数是对象，用来配置fetch,可以不写，不写使用默认值
+        // fetch无法在地址上自动携带参数，只能通过手动添加
+        const fd = new FormData();
+        fd.append('username', 'tom')  //FormData 自动传Content-Type
+        fetch(url, {
+            method: 'post',
+            // body: 'username=hhh&age=20',
+            // body: { username: 'aaa' },
+            body: JSON.stringify({ username: 'ccc' }), // 不能直接传对象，传对象仅仅只会转成字符串[object][object],需要进行如左边所示处理
+            // body: fd,
+            headers: {
+                // 'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'  // 默认情况下服务器不接受'application/json'这样的设置，需要服务器端做一些专门的设置，即，接口
+            },
+            // mode: 'cors',  // 如果跨域设置成这个，不设置默认也是这个
+            // credentials: 'include'  // 等价withCredentials
+        })
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    // console.log(response.json());  //打印出Promise对象，无法看到数据，可以返回一下，再使用then()
+
+                    return response.json()  // 如果数据是json格式可以使用，直接返回JS对应数据类型
+                    // return response.text()  // 只当文本返回
+                } else {
+                    throw new Error(`HTTP CODE 异常 ${response.status}`)
+                }
+            }).then(data => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    </script>
+</body>
+
+</html>

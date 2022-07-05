@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/axios@0.19.2/dist/axios.min.js"></script>
+    <script>
+        // axios是一个基于Promise的HTTP库，可以用在浏览器和node.js中
+        // axios是Ajax第三方库
+        // http://www.axios-js.com/zh-cn/docs/    安装教程
+
+        const url = 'https://www.imooc.com/api/http/search/suggest?words=js';
+        // console.log(axios);
+        // axios(url, {
+        //     method: 'post',
+
+        //     // 请求时的头信息
+        //     headers: {
+        //         'Content-Type': 'application/x-www-form-urlencoded'
+        //         // 'Content-Type': 'application/json'
+        //     },
+
+        //     // 请求头携带信息
+        //     params: {
+        //         username: 'alex'
+        //     },
+
+        //     // 请求体携带数据
+        //     // axios可以传入多种形式的数据，不像自己封装的Ajax，只能输入一种格式数据
+        //     // {
+        //     //     username:alex
+        //     // }传这种格式必须用'Content-Type': 'application/json'
+        //     data: 'age=18&sex=male',  //传那种形式，必须用那种Content-Type
+        //     // timeout: 10
+        //     // withCredentials: true
+        // })
+        //     .then(response => {
+        //         console.log(response);
+        //         console.log(response.data.data);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+
+
+        // 这里不提供getJSON(),get有getJSON的功能，自动转化成名值对形式
+        // axios.get(url, {
+        //     params: {
+        //         username: 'alex'
+        //     }
+        // })
+        //     .then(response => {
+        //         console.log(response);
+        //         console.log(response.data.data);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+
+        // post第二个参数专门用来传数据，不用填写配置信息，所以可以直接传入数据
+        // 这里你传入的数据是什么格式，post自动给你匹配Content-Type
+        // axios.post(url, 'username=alex&age=20')
+        //     .then(response => {
+        //         console.log(response);
+        //         console.log(response.data.data);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+
+        // 默认情况下服务器不接受'application/json'这样的设置，需要服务器端做一些专门的设置，即，接口
+        axios.post('https://www.imooc.com/api/http/json/search/suggest?words=js', {
+            username: 'hhh',
+            age: 20
+        })
+            .then(response => {
+                console.log(response);
+                console.log(response.data.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        // axios.put();
+        // axios.delete();
+
+        // 实际开发中常用
+    </script>
+</body>
+
+</html>
