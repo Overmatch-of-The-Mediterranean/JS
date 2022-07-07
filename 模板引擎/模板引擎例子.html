@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="list"></ul>
+
+    <script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+
+    <script id="tpl-students" type="text/html">
+        {{each students}}
+        <li>{{$value.name}} {{$value.age}} {{$value.sex}}</li>
+        {{/each}}
+    </script>
+
+    <script>
+        // 学生数据
+        const students = [
+            {
+                name: 'Alex',
+                age: 18,
+                sex: 'male'
+            },
+            {
+                name: '张三',
+                age: 28,
+                sex: 'male'
+            },
+            {
+                name: '李四',
+                age: 20,
+                sex: 'female'
+            }
+        ]
+
+        // 1.使用模板字符串
+        const list = document.getElementById('list');
+        // let html = '';
+        // for (const student of students) {
+        //     html += `<li>${student.name} ${student.age} ${student.sex}</li>`;
+        // }
+        // list.innerHTML = html;
+
+        // 2.使用模板引擎 art-template
+        // 2.1引入模板引擎
+
+        // 2.2准备好模板
+
+        // 2.3获取模板
+        list.innerHTML = template('tpl-students', {
+            students
+        });
+    </script>
+</body>
+
+</html>
